@@ -2,20 +2,43 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle, ArrowRight, Mail, MapPin } from "lucide-react";
+import { CheckCircle, ArrowRight, Mail, MapPin, Loader2 } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
-      setIsSubscribed(true);
-      setTimeout(() => {
-        setIsSubscribed(false);
+    if (!email.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setIsSubscribed(true);
         setEmail("");
-      }, 4000);
+        setTimeout(() => {
+          setIsSubscribed(false);
+        }, 6000);
+      } else {
+        setErrorMessage(data.error || "Failed to subscribe. Please try again.");
+      }
+    } catch {
+      setErrorMessage("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,12 +105,27 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-zinc-900 border border-zinc-800 hover:border-zinc-700 focus:border-brand-accent focus:outline-none rounded-xl px-4 py-3 font-sans text-xs text-white placeholder-zinc-500 transition-colors"
                   />
+                  {errorMessage && (
+                    <span className="text-[11px] text-red-400 font-medium pl-1">
+                      {errorMessage}
+                    </span>
+                  )}
                   <button
                     type="submit"
-                    className="w-full py-3 bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 font-bold rounded-xl font-sans text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full py-3 bg-brand-accent hover:bg-brand-accent-hover disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-zinc-950 font-bold rounded-xl font-sans text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    Subscribe
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Subscribing...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Subscribe</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

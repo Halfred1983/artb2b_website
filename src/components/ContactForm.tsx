@@ -1,25 +1,49 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle2, Paintbrush, Building2, HelpCircle, ArrowRight, Sparkles } from "lucide-react";
+import { Send, CheckCircle2, Paintbrush, Building2, HelpCircle, ArrowRight, Sparkles, Loader2, Award } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({ name: "", email: "", role: "artist", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setFormSubmitted(true);
-      setTimeout(() => {
-        setFormSubmitted(false);
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setFormSubmitted(true);
         setFormData({ name: "", email: "", role: "artist", message: "" });
-      }, 4000);
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 6000);
+      } else {
+        setErrorMessage(data.error || "Failed to submit inquiry. Please try again.");
+      }
+    } catch {
+      setErrorMessage("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <section id="partner-form" className="py-24 bg-white relative overflow-hidden">
+      <div id="ambassador-apply" className="absolute -top-10" />
       {/* Aesthetic blur highlights */}
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-10 right-0 w-[300px] h-[300px] bg-zinc-100 rounded-full blur-3xl -z-10" />
@@ -114,10 +138,10 @@ export default function ContactForm() {
                   {/* Role Selector */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">I am a</label>
-                    <div className="grid grid-cols-3 gap-2 bg-white border border-zinc-200 p-1.5 rounded-2xl shadow-sm">
-                      {(["artist", "venue", "other"] as const).map((roleVal) => {
-                        const Icon = roleVal === "artist" ? Paintbrush : roleVal === "venue" ? Building2 : HelpCircle;
-                        const labelText = roleVal === "artist" ? "Artist" : roleVal === "venue" ? "Venue" : "Other";
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-white border border-zinc-200 p-1.5 rounded-2xl shadow-sm">
+                      {(["artist", "venue", "ambassador", "other"] as const).map((roleVal) => {
+                        const Icon = roleVal === "artist" ? Paintbrush : roleVal === "venue" ? Building2 : roleVal === "ambassador" ? Award : HelpCircle;
+                        const labelText = roleVal === "artist" ? "Artist" : roleVal === "venue" ? "Venue" : roleVal === "ambassador" ? "Ambassador" : "Other";
                         const isSelected = formData.role === roleVal;
                         
                         return (
@@ -125,7 +149,7 @@ export default function ContactForm() {
                             key={roleVal}
                             type="button"
                             onClick={() => setFormData({ ...formData, role: roleVal })}
-                            className={`flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                            className={`flex items-center justify-center gap-1.5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                               isSelected
                                 ? "bg-zinc-950 text-white shadow-md"
                                 : "text-zinc-500 hover:text-zinc-950 hover:bg-zinc-50"
@@ -150,6 +174,8 @@ export default function ContactForm() {
                           ? "Tell us about your art style, medium, or share a link to your portfolio..."
                           : formData.role === "venue"
                           ? "Tell us about your location, type of business, wall space dimensions..."
+                          : formData.role === "ambassador"
+                          ? "Tell us about your local network or why you'd love to connect venues with art..."
                           : "Let us know how you'd like to collaborate with us..."
                       }
                       value={formData.message}
@@ -158,13 +184,30 @@ export default function ContactForm() {
                     />
                   </div>
 
+                  {/* Error display */}
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium">
+                      {errorMessage}
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full py-4 bg-zinc-950 hover:bg-zinc-800 text-white font-bold rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer group hover:translate-y-[-1px]"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-zinc-950 hover:bg-zinc-800 disabled:bg-zinc-600 disabled:cursor-not-allowed text-white font-bold rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer group hover:translate-y-[-1px]"
                   >
-                    <span>Submit Partner Inquiry</span>
-                    <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Sending Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Partner Inquiry</span>
+                        <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
