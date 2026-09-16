@@ -10,12 +10,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/privacy",
-        destination: "/terms-and-conditions#privacy",
+        destination: "/privacy-policy",
         permanent: true,
       },
       {
-        source: "/privacy-policy",
-        destination: "/terms-and-conditions#privacy",
+        source: "/support",
+        destination: "/faq",
         permanent: true,
       },
     ];

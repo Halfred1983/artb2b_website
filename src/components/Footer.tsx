@@ -156,10 +156,11 @@ export default function Footer() {
               Where Art Finds Space, And Spaces Find Art
             </div>
 
-            <div className="flex items-center gap-6">
-              <Link href="/terms-and-conditions#privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
-              <a href="#cookies" className="hover:text-white transition-colors">Cookies Settings</a>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms &amp; Conditions</Link>
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/accessibility" className="hover:text-white transition-colors">Accessibility</Link>
+              <Link href="/delete-account" className="hover:text-white transition-colors">Delete Account</Link>
             </div>
           </div>
 
