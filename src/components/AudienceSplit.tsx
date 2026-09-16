@@ -13,7 +13,7 @@ export default function AudienceSplit() {
       type: "Artist" as const,
       tagline: "THE CANVAS IS CREATED",
       subHeadline: "Stop keeping your masterpieces locked away at home.",
-      description: "Every collection starts in the studio, but art isn’t meant to hide in a corner. We cut out the slow emails, confusing applications, and gallery gatekeepers so you can take full control of your career. With our easy-to-use app, you can book real-world exhibition spaces in just a few taps and turn your hard work into an active showcase.",
+      description: "Every collection starts in the studio, but art isn’t meant to hide in a corner. We cut out the slow emails, confusing applications, and gallery gatekeepers so you can take full control of your career. With our easy to use app, you can book real world exhibition spaces in just a few taps and turn your hard work into an active showcase.",
       bullets: [
         "Easily discover and book premium local or international exhibition spaces.",
         "Get your exhibition confirmed in a few days, not a few months.",
@@ -32,7 +32,7 @@ export default function AudienceSplit() {
       type: "Venue" as const,
       tagline: "THE CANVAS IN A VENUE",
       subHeadline: "Transform your unused walls into a vibrant gallery.",
-      description: "We bring art straight to where real life happens. Whether you run a buzzing coffee shop, a cozy bistro, a stylish hotel lobby, or a creative co-working hub, your empty walls have massive potential. By showing unique art from local creators, you instantly elevate your space, keep customers sticking around longer, and become a true part of the community.",
+      description: "We bring art straight to where real life happens. Whether you run a buzzing coffee shop, a cozy bistro, a stylish hotel lobby, or a creative coworking hub, your empty walls have massive potential. By showing unique art from local creators, you instantly elevate your space, keep customers sticking around longer, and become a true part of the community.",
       bullets: [
         "Sign up your space for free and easily set your own wall rental prices.",
         "Get matched with amazing local artwork that fits your space and style perfectly.",
@@ -51,11 +51,11 @@ export default function AudienceSplit() {
       type: "Revenue" as const,
       tagline: "THE CANVAS BECOMES REVENUE",
       subHeadline: "A fair community where creating art actually pays off.",
-      description: "Art shouldn’t just look beautiful—it needs to support the people who make it and host it. When a customer falls in love with a piece hanging on a venue's wall, they can buy or rent it instantly by scanning a simple QR code. We handle everything securely in the app, stripping away high gallery commissions so the money goes right back to the creators.",
+      description: "Art shouldn’t just look beautiful, it needs to support the people who make it and host it. When a customer falls in love with a piece hanging on a venue's wall, they can buy or rent it instantly by scanning a simple QR code. We handle everything securely in the app, stripping away high gallery commissions so the money goes right back to the creators.",
       bullets: [
         "Artists keep a fair, transparent 70% layout on all artwork sales and wall rentals.",
         "Venues pocket a steady 50% on rental fees plus a 10% bonus on every sale.",
-        "Zero complicated paperwork—the app handles payments and simple courier shipping."
+        "Zero complicated paperwork, the app handles payments and simple courier shipping."
       ],
       bgImage: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=600&auto=format&fit=crop",
       cta: "See How It Works",

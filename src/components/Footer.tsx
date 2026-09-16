@@ -69,7 +69,7 @@ export default function Footer() {
               </Link>
 
               <p className="font-sans text-sm text-zinc-400 max-w-sm mb-8 leading-relaxed">
-                We are a direct, on-demand platform redefining how art is shared by taking creative work beyond traditional gallery spaces and placing it directly into people's everyday lives.
+                We are a direct, on demand platform redefining how art is shared by taking creative work beyond traditional gallery spaces and placing it directly into people's everyday lives.
               </p>
 
               {/* Quick Info details */}

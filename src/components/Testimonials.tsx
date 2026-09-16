@@ -27,7 +27,7 @@ export default function Testimonials() {
       category: "venue",
     },
     {
-      quote: "As an independent photographer, getting gallery space is extremely competitive. With ArtB2B, I listed my street photography series and got matched with a modern co-working space within 48 hours. The community feedback has been amazing.",
+      quote: "As an independent photographer, getting gallery space is extremely competitive. With ArtB2B, I listed my street photography series and got matched with a modern coworking space within 48 hours. The community feedback has been amazing.",
       author: "Elena Rostova",
       role: "Fine Art Photographer",
       location: "Prague, CZ",

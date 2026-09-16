@@ -140,7 +140,7 @@ export default function TermsAndConditionsPage() {
                     Artist Responsibilities
                   </h3>
                   <ul className="space-y-2.5 list-disc pl-5 mt-3 text-zinc-700">
-                    <li>Artists are responsible for transporting their artwork to the venue on the day of check-in and installing it in the space allocated by the venue owner.</li>
+                    <li>Artists are responsible for transporting their artwork to the venue on the day of check in and installing it in the space allocated by the venue owner.</li>
                     <li>If an artwork is sold during the exhibition, the artist must wait until the end of the exhibition to hand it over to the buyer.</li>
                     <li>At the end of the exhibition, artists are required to take back their artwork.</li>
                   </ul>

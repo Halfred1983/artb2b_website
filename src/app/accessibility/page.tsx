@@ -52,7 +52,7 @@ export default function AccessibilityPage() {
                   Our Ongoing Commitment
                 </h2>
                 <p>
-                  This statement reflects our ongoing efforts to make ARTB2B accessible to all individuals. We are dedicated to providing a user-friendly experience for people with disabilities, and we strive to adhere to recognized web accessibility standards, including the Web Content Accessibility Guidelines (WCAG 2.1).
+                  This statement reflects our ongoing efforts to make ARTB2B accessible to all individuals. We are dedicated to providing a user friendly experience for people with disabilities, and we strive to adhere to recognized web accessibility standards, including the Web Content Accessibility Guidelines (WCAG 2.1).
                 </p>
               </div>
 

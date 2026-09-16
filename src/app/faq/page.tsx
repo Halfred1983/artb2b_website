@@ -63,7 +63,7 @@ export default function FAQPage() {
       category: "artist",
       answer: (
         <p className="text-zinc-600 leading-relaxed font-sans">
-          To set up your artist profile, simply download the ArtB2B app from the App Store or Google Play and register as an artist! The app will guide you step-by-step through the registration process, allowing you to list your biography, select preferred exhibition terms, and upload pictures of your artwork. Once approved, you will be fully set up to discover venues around you and book your next exhibition!
+          To set up your artist profile, simply download the ArtB2B app from the App Store or Google Play and register as an artist! The app will guide you step by step through the registration process, allowing you to list your biography, select preferred exhibition terms, and upload pictures of your artwork. Once approved, you will be fully set up to discover venues around you and book your next exhibition!
         </p>
       )
     },
@@ -73,7 +73,7 @@ export default function FAQPage() {
       category: "venue",
       answer: (
         <p className="text-zinc-650 leading-relaxed font-sans">
-          To set up your venue profile, download the app and register as a venue! You will be guided through the onboarding flow where you can provide essential details about your space, such as location, description, the number of exhibition spots, and the pricing you wish to charge. Remember to upload a few high-quality pictures of your space so artists can easily visualize where their exhibitions will be held. After filling out this information, you will be ready to receive bookings from artists all around the world! If you have any questions along the way, do not hesitate to contact us!
+          To set up your venue profile, download the app and register as a venue! You will be guided through the onboarding flow where you can provide essential details about your space, such as location, description, the number of exhibition spots, and the pricing you wish to charge. Remember to upload a few high quality pictures of your space so artists can easily visualize where their exhibitions will be held. After filling out this information, you will be ready to receive bookings from artists all around the world! If you have any questions along the way, do not hesitate to contact us!
         </p>
       )
     },

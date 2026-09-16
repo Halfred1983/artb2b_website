@@ -34,7 +34,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="font-sans text-lg text-zinc-600 max-w-xl mb-10 leading-relaxed">
-              Stop keeping your best work locked away at home! Join over 200 independent artists already using our app to match with more than 50 of London’s coolest cafés, bars, and creative spaces. With over 250 premium wall spaces ready to book right now, ARTB2B cuts out the gatekeepers and complications—making it effortless to set your own exhibition prices, share your art with the world, and sell or rent your work directly to a real audience.
+              Stop keeping your best work locked away at home! Join over 200 independent artists already using our app to match with more than 50 of London’s coolest cafés, bars, and creative spaces. With over 250 premium wall spaces ready to book right now, ARTB2B cuts out the gatekeepers and complications, making it effortless to set your own exhibition prices, share your art with the world, and sell or rent your work directly to a real audience.
             </p>
 
             {/* Interactive Toggle for App Mockup */}

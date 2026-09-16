@@ -17,7 +17,7 @@ export default function HowItWorks() {
     {
       number: "03",
       title: "Spaces Transform & Sell",
-      description: "Art is hung on empty walls. Guests discover local talent, scanning on-wall QR codes to read about the piece and purchase it directly.",
+      description: "Art is hung on empty walls. Guests discover local talent, scanning QR codes on the wall to read about the piece and purchase it directly.",
       icon: Store,
     },
   ];

@@ -4,7 +4,7 @@ export default function Ambassador() {
   const benefits = [
     {
       title: "Open Unexpected Spaces",
-      description: "Identify unique local spots—like boutique hotels, trendy cafés, co-working spaces, and bistros—that have blank walls just waiting to be transformed into creative hubs.",
+      description: "Identify unique local spots such as boutique hotels, trendy cafés, coworking spaces, and bistros that have blank walls just waiting to be transformed into creative hubs.",
       icon: Landmark,
     },
     {
@@ -14,7 +14,7 @@ export default function Ambassador() {
     },
     {
       title: "Grow Your Professional Network",
-      description: "Expand your reach across hospitality, lifestyle, and design industries while playing a foundational role in an innovative, rapidly growing art-tech ecosystem.",
+      description: "Expand your reach across hospitality, lifestyle, and design industries while playing a foundational role in an innovative, rapidly growing art tech ecosystem.",
       icon: Users,
     }
   ];
@@ -103,8 +103,8 @@ export default function Ambassador() {
                     ★
                   </div>
                   <div>
-                    <p className="text-[10px] text-zinc-400 italic">&quot;Ever since I started bringing venues onto the platform, it completely changed my life and how I approach local businesses. Before, these bars and restaurants were just places where I went to eat—now, I have a real, professional tool to pitch to them and transform their empty walls.&quot;</p>
-                    <p className="text-[10px] font-bold text-white mt-2">- Nesa, Ambassador (Italy)</p>
+                    <p className="text-[10px] text-zinc-400 italic">&quot;Ever since I started bringing venues onto the platform, it completely changed my life and how I approach local businesses. Before, these bars and restaurants were just places where I went to eat. Now, I have a real, professional tool to pitch to them and transform their empty walls.&quot;</p>
+                    <p className="text-[10px] font-bold text-white mt-2">Nesa, Ambassador (Italy)</p>
                   </div>
                 </div>
 

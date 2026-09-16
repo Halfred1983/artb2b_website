@@ -62,7 +62,7 @@ export default function ContactForm() {
               a portfolio to show?
             </h2>
             <p className="font-sans text-base text-zinc-600 max-w-lg mb-10 leading-relaxed">
-              We make setting up real-world exhibitions effortless. Join our London network today to get your art out of the studio, or turn your venue&apos;s empty walls into premium exhibition spaces.
+              We make setting up real world exhibitions effortless. Join our London network today to get your art out of the studio, or turn your venue&apos;s empty walls into premium exhibition spaces.
             </p>
 
             {/* Quick Benefits list */}
