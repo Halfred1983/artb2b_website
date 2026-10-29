@@ -17,9 +17,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.artb2b.art"),
-  title: "ArtB2B | Connecting Art & Spaces",
+  title: "ARTB2B | Your Art. More Spaces. More Opportunities.",
   description:
-    "Turn everyday walls into creative windows. We connect local artists with venues and galleries to display and sell art in coffee shops, bistros, and workspaces.",
+    "Exhibit your artwork across a growing network of cafés, restaurants, hotels and creative venues. Choose a flexible way to exhibit with an ARTB2B Subscription or Pay by Day.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -28,27 +28,27 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
-    title: "ArtB2B | Connecting Art & Spaces",
+    title: "ARTB2B | Your Art. More Spaces. More Opportunities.",
     description:
-      "Turn everyday walls into creative windows. We connect local artists with venues and galleries to display and sell art in coffee shops, bistros, and workspaces.",
+      "Exhibit your artwork across a growing network of cafés, restaurants, hotels and creative venues. Choose a flexible way to exhibit with an ARTB2B Subscription or Pay by Day.",
     url: "https://www.artb2b.art",
-    siteName: "ArtB2B",
+    siteName: "ARTB2B",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ArtB2B | Connecting Art & Spaces",
+        alt: "ARTB2B | Your Art. More Spaces. More Opportunities.",
       },
     ],
-    locale: "en_US",
+    locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ArtB2B | Connecting Art & Spaces",
+    title: "ARTB2B | Your Art. More Spaces. More Opportunities.",
     description:
-      "Turn everyday walls into creative windows. We connect local artists with venues and galleries to display and sell art in coffee shops, bistros, and workspaces.",
+      "Exhibit your artwork across a growing network of cafés, restaurants, hotels and creative venues. Choose a flexible way to exhibit with an ARTB2B Subscription or Pay by Day.",
     images: ["/og-image.png"],
   },
 };
