@@ -288,39 +288,6 @@ export const VERIFIED_VENUES: VerifiedVenue[] = [
       "https://firebasestorage.googleapis.com/v0/b/artb2b-34af2.appspot.com/o/g4vIJfqI7tUYNhyud7NcJ9eGC2u1%2F23c9c269-7acd-43a8-a49b-648dbc2f9099%2Fphotos%2Fscaled_17899.jpg?alt=media&token=a54bf6aa-0d39-4b37-966c-480c61a08117",
   },
   {
-    id: "9c0d93c3-1b2f-4e59-80ae-a07e84ec8e34",
-    name: "Malavenda Café London",
-    neighborhood: "London Fields, London",
-    address: "1 Mentmore Terrace, London E8 3AL",
-    category: "Artisanal Café",
-    description:
-      "Every corner at Malavenda Café is an invitation to creativity, opening its doors to artists who share their vision with the local community.",
-    photoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/artb2b-34af2.appspot.com/o/fSUlZEPye3RT3CaJpKI3TvoO1NC2%2F9c0d93c3-1b2f-4e59-80ae-a07e84ec8e34%2Fphotos%2Fimage_picker_559C9E68-1E68-4D2B-8F3B-659EB1EEA2AC-1493-00001153C5338963.jpg?alt=media&token=ac6a4c78-aa98-43b3-8220-9204ceaf6e5e",
-  },
-  {
-    id: "f16a02bc-2848-4d69-a12c-250b8fea5807",
-    name: "ICCIUK Princes Street",
-    neighborhood: "Oxford Circus, London",
-    address: "1 Princes St, London W1B 2AY",
-    category: "Cultural Institution",
-    description:
-      "Just a minute walk from Oxford Circus, this historic venue at 1 Princes Street hosts business leaders, visitors and curated art exhibitions.",
-    photoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/artb2b-34af2.appspot.com/o/h4NRRreljtfvSy6MGmK35upmlAF3%2Ff16a02bc-2848-4d69-a12c-250b8fea5807%2Fphotos%2Fimage_picker_708A2702-C0A3-4467-9002-D2BBB2ED277F-10524-0000128E14FEB280.jpg?alt=media&token=4f59c162-4b7e-4604-917f-b4d11666f374",
-  },
-  {
-    id: "deedd352-eb86-4d3e-9331-9c06981ca40e",
-    name: "Amica Shoreditch",
-    neighborhood: "Shoreditch, London",
-    address: "Rivington St, London EC2A 3AY",
-    category: "Fitness & Lifestyle Studio",
-    description:
-      "Textured brick walls and spotlighted entrance spaces on Rivington Street seen by hundreds of daily visitors in Shoreditch.",
-    photoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/artb2b-34af2.appspot.com/o/2zCGP5rjdIO1e69Q0nr67nNfO0p2%2Fdeedd352-eb86-4d3e-9331-9c06981ca40e%2Fphotos%2Fscaled_1000272845.jpg?alt=media&token=e9abfd5e-c17e-4775-8983-99edd38955e4",
-  },
-  {
     id: "96454594-2ecb-4ee9-a44d-bdcf12b06a24",
     name: "Baccaro London",
     neighborhood: "Teddington, London",
