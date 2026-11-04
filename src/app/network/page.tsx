@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { MapPin, ArrowUpRight, Sparkles, Palette, Building2 } from "lucide-react";
@@ -6,8 +8,11 @@ import {
   VERIFIED_VENUES,
   VERIFIED_PLACEMENTS,
 } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function NetworkPage() {
+  const { tr } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfcfd]">
       <Navbar />
@@ -21,15 +26,18 @@ export default function NetworkPage() {
             <div className="max-w-3xl mx-auto text-center">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-zinc-950" />
-                Our Network
+                {tr("Our Network", "Nuestra Red")}
               </span>
 
               <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.05] mb-6">
-                Discover the ARTB2B Network
+                {tr("Discover the ARTB2B Network", "Descubre la Red ARTB2B")}
               </h1>
 
               <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Explore the venues and artists bringing contemporary art into everyday life. From cafés and restaurants to hotels and creative spaces, our network makes art part of the places people already love.
+                {tr(
+                  "Explore the venues and artists bringing contemporary art into everyday life. From cafés and restaurants to hotels and creative spaces, our network makes art part of the places people already love.",
+                  "Explora los espacios y artistas que llevan el arte contemporáneo a la vida cotidiana. Desde cafeterías y restaurantes hasta hoteles y espacios creativos, nuestra red hace que el arte forme parte de los lugares que la gente ya disfruta."
+                )}
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -37,7 +45,7 @@ export default function NetworkPage() {
                   href="#verified-venues"
                   className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                 >
-                  <span>Explore Venues</span>
+                  <span>{tr("Explore Venues", "Explorar Espacios")}</span>
                 </a>
 
                 <a
@@ -46,7 +54,7 @@ export default function NetworkPage() {
                   rel="noopener noreferrer"
                   className="px-8 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-50 transition-all border border-zinc-200 shadow-sm font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                 >
-                  <span>Open in App</span>
+                  <span>{tr("Open in App", "Abrir en la App")}</span>
                   <ArrowUpRight className="w-4 h-4 text-zinc-950" />
                 </a>
               </div>
@@ -61,14 +69,17 @@ export default function NetworkPage() {
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
                   <Building2 className="w-4 h-4 text-zinc-950" />
-                  <span>Participating Partners</span>
+                  <span>{tr("Participating Partners", "Socios Participantes")}</span>
                 </div>
                 <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-                  Verified Participating Venues
+                  {tr("Verified Participating Venues", "Espacios Participantes Verificados")}
                 </h2>
               </div>
               <p className="font-sans text-sm text-zinc-500 max-w-md">
-                Real hospitality, dining and creative venues hosting contemporary artwork across the ARTB2B network.
+                {tr(
+                  "Real hospitality, dining and creative venues hosting contemporary artwork across the ARTB2B network.",
+                  "Espacios reales de hostelería, gastronomía y creatividad que exhiben arte contemporáneo en la red ARTB2B."
+                )}
               </p>
             </div>
 
@@ -86,7 +97,7 @@ export default function NetworkPage() {
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full bg-zinc-950/85 backdrop-blur-sm text-white font-sans text-[10px] font-bold uppercase tracking-wider">
-                        {venue.category}
+                        {tr(venue.category, venue.categoryEs)}
                       </span>
                     </div>
                   </div>
@@ -100,7 +111,7 @@ export default function NetworkPage() {
                         {venue.name}
                       </h3>
                       <p className="font-sans text-xs text-zinc-600 leading-relaxed">
-                        {venue.description}
+                        {tr(venue.description, venue.descriptionEs)}
                       </p>
                     </div>
 
@@ -124,14 +135,17 @@ export default function NetworkPage() {
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">
                   <Palette className="w-4 h-4 text-zinc-950" />
-                  <span>Approved Artist Credits</span>
+                  <span>{tr("Approved Artist Credits", "Créditos de Artistas Aprobados")}</span>
                 </div>
                 <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-                  Artworks in Everyday Spaces
+                  {tr("Artworks in Everyday Spaces", "Obras de Arte en Espacios Cotidianos")}
                 </h2>
               </div>
               <p className="font-sans text-sm text-zinc-500 max-w-md">
-                Original works by ARTB2B artists exhibited across participating London venues.
+                {tr(
+                  "Original works by ARTB2B artists exhibited across participating London venues.",
+                  "Obras originales de artistas de ARTB2B expuestas en espacios participantes de Londres."
+                )}
               </p>
             </div>
 
@@ -157,7 +171,7 @@ export default function NetworkPage() {
                         {item.artworkTitle}
                       </h3>
                       <p className="font-sans text-xs text-zinc-600 mt-1">
-                        Artist:{" "}
+                        {tr("Artist:", "Artista:")}{" "}
                         <span className="font-bold text-zinc-950">{item.artistName}</span>
                       </p>
                     </div>

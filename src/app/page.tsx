@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -20,8 +22,10 @@ import {
   VERIFIED_VENUES,
   VERIFIED_PLACEMENTS,
 } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
+  const { tr } = useLanguage();
   const featuredVenues = VERIFIED_VENUES.slice(0, 6);
   const featuredPlacements = VERIFIED_PLACEMENTS.slice(0, 4);
 
@@ -42,90 +46,99 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-                Subscriptions
+                {tr("Subscriptions", "Suscripciones")}
               </span>
               <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-6 leading-tight">
-                Choose Your Exhibition Plan
+                {tr("Choose Your Exhibition Plan", "Elige Tu Plan de Exposición")}
               </h2>
               <p className="font-sans text-base sm:text-lg text-zinc-600 leading-relaxed">
-                Exhibit across our network with one, two, three or four 1 × 1 m exhibition spaces. Every Subscription includes artwork storage, curatorial coordination, transport from ARTB2B storage to participating venues, installation and artwork rotation.
+                {tr(
+                  "Exhibit across our network with one, two, three or four 1 × 1 m exhibition spaces. Every Subscription includes artwork storage, curatorial coordination, transport from ARTB2B storage to participating venues, installation and artwork rotation.",
+                  "Expón en nuestra red con uno, dos, tres o cuatro espacios de exposición de 1 × 1 m. Cada Suscripción incluye almacenamiento de obras, coordinación curatorial, transporte desde el almacén de ARTB2B hasta los espacios participantes, instalación y rotación de obras."
+                )}
               </p>
             </div>
 
             {/* Four Exact App Plan Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              {SUBSCRIPTION_PLANS.map((plan) => (
-                <div
-                  key={plan.id}
-                  className={`relative rounded-[2rem] p-8 flex flex-col justify-between border transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-zinc-950 text-white border-zinc-950 shadow-2xl scale-[1.02]"
-                      : "bg-white text-zinc-950 border-zinc-200/80 hover:border-zinc-950 shadow-sm hover:shadow-xl"
-                  }`}
-                >
-                  {plan.badge && (
-                    <div className="mb-4">
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
-                          plan.popular
-                            ? "bg-brand-accent text-zinc-950"
-                            : "bg-zinc-100 text-zinc-800 border border-zinc-200"
-                        }`}
-                      >
-                        {plan.badge}
-                      </span>
-                    </div>
-                  )}
+              {SUBSCRIPTION_PLANS.map((plan) => {
+                const badgeText = tr(plan.badge, plan.badgeEs);
+                const featuresList = tr(plan.features, plan.featuresEs);
+                return (
+                  <div
+                    key={plan.id}
+                    className={`relative rounded-[2rem] p-8 flex flex-col justify-between border transition-all duration-300 ${
+                      plan.popular
+                        ? "bg-zinc-950 text-white border-zinc-950 shadow-2xl scale-[1.02]"
+                        : "bg-white text-zinc-950 border-zinc-200/80 hover:border-zinc-950 shadow-sm hover:shadow-xl"
+                    }`}
+                  >
+                    {badgeText && (
+                      <div className="mb-4">
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
+                            plan.popular
+                              ? "bg-brand-accent text-zinc-950"
+                              : "bg-zinc-100 text-zinc-800 border border-zinc-200"
+                          }`}
+                        >
+                          {badgeText}
+                        </span>
+                      </div>
+                    )}
 
-                  <div>
-                    <h3 className="font-heading text-2xl font-black mb-1">{plan.name}</h3>
-                    <p
-                      className={`font-sans text-xs mb-6 ${
-                        plan.popular ? "text-zinc-400" : "text-zinc-500"
-                      }`}
-                    >
-                      {plan.unitPrice}
-                    </p>
-
-                    <div className="flex items-baseline gap-1 mb-6">
-                      <span className="font-heading text-4xl font-black">{plan.price}</span>
-                      <span
-                        className={`font-sans text-xs font-semibold ${
+                    <div>
+                      <h3 className="font-heading text-2xl font-black mb-1">
+                        {tr(plan.name, plan.nameEs)}
+                      </h3>
+                      <p
+                        className={`font-sans text-xs mb-6 ${
                           plan.popular ? "text-zinc-400" : "text-zinc-500"
                         }`}
                       >
-                        / month
-                      </span>
+                        {tr(plan.unitPrice, plan.unitPriceEs)}
+                      </p>
+
+                      <div className="flex items-baseline gap-1 mb-6">
+                        <span className="font-heading text-4xl font-black">{plan.price}</span>
+                        <span
+                          className={`font-sans text-xs font-semibold ${
+                            plan.popular ? "text-zinc-400" : "text-zinc-500"
+                          }`}
+                        >
+                          {tr("/ month", "/ mes")}
+                        </span>
+                      </div>
+
+                      <ul className="space-y-3 mb-8">
+                        {featuresList.slice(0, 5).map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2.5 text-xs font-sans">
+                            <CheckCircle2
+                              className={`w-4 h-4 shrink-0 mt-0.5 ${
+                                plan.popular ? "text-brand-accent" : "text-zinc-950"
+                              }`}
+                            />
+                            <span className={plan.popular ? "text-zinc-300" : "text-zinc-600"}>
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.slice(0, 5).map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs font-sans">
-                          <CheckCircle2
-                            className={`w-4 h-4 shrink-0 mt-0.5 ${
-                              plan.popular ? "text-brand-accent" : "text-zinc-950"
-                            }`}
-                          />
-                          <span className={plan.popular ? "text-zinc-300" : "text-zinc-600"}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                    <Link
+                      href="/subscriptions"
+                      className={`w-full py-3.5 rounded-xl font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors ${
+                        plan.popular
+                          ? "bg-brand-accent text-zinc-950 hover:bg-brand-accent-hover"
+                          : "bg-zinc-950 text-white hover:bg-zinc-800"
+                      }`}
+                    >
+                      {tr("View Plan", "Ver Plan")}
+                    </Link>
                   </div>
-
-                  <Link
-                    href="/subscriptions"
-                    className={`w-full py-3.5 rounded-xl font-sans text-xs font-bold uppercase tracking-wider text-center transition-colors ${
-                      plan.popular
-                        ? "bg-brand-accent text-zinc-950 hover:bg-brand-accent-hover"
-                        : "bg-zinc-950 text-white hover:bg-zinc-800"
-                    }`}
-                  >
-                    View Plan
-                  </Link>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="flex justify-center">
@@ -133,7 +146,7 @@ export default function Home() {
                 href="/subscriptions"
                 className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center gap-2"
               >
-                <span>View Plans</span>
+                <span>{tr("View Plans", "Ver Planes")}</span>
                 <ArrowRight className="w-4 h-4 text-brand-accent" />
               </Link>
             </div>
@@ -147,20 +160,23 @@ export default function Home() {
               {/* Left Copy */}
               <div className="lg:col-span-5">
                 <span className="px-3.5 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-                  Pay by Day
+                  {tr("Pay by Day", "Pago por Día")}
                 </span>
                 <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-6 leading-tight">
-                  Exhibit on Your Terms
+                  {tr("Exhibit on Your Terms", "Expón a Tu Manera")}
                 </h2>
                 <p className="font-sans text-base sm:text-lg text-zinc-600 mb-8 leading-relaxed">
-                  Prefer a one off exhibition? Pay by Day gives you the flexibility to book exhibition space without a monthly Subscription. You arrange and manage your own artwork delivery, installation, removal and related logistics.
+                  {tr(
+                    "Prefer a one off exhibition? Pay by Day gives you the flexibility to book exhibition space without a monthly Subscription. You arrange and manage your own artwork delivery, installation, removal and related logistics.",
+                    "¿Prefieres una exposición puntual? Pago por Día te ofrece la flexibilidad de reservar espacio de exposición sin una Suscripción mensual. Tú organizas y gestionas la entrega, instalación, retirada y logística de tu obra."
+                  )}
                 </p>
 
                 <Link
                   href="/pay-by-day"
                   className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center gap-2"
                 >
-                  <span>Explore Pay by Day</span>
+                  <span>{tr("Explore Pay by Day", "Explorar Pago por Día")}</span>
                   <ArrowRight className="w-4 h-4 text-brand-accent" />
                 </Link>
               </div>
@@ -174,27 +190,47 @@ export default function Home() {
                       <Layers className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-brand-accent">
-                      Continuous Managed Service
+                      {tr("Continuous Managed Service", "Servicio Gestionado Continuo")}
                     </span>
                     <h3 className="font-heading text-2xl font-bold mt-1 mb-4">
-                      ARTB2B Subscription
+                      {tr("ARTB2B Subscription", "Suscripción ARTB2B")}
                     </h3>
                     <ul className="space-y-3 text-xs text-zinc-300 font-sans">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
-                        <span>Deliver once to our Hoxton operational hub</span>
+                        <span>
+                          {tr(
+                            "Deliver once to our Hoxton operational hub",
+                            "Entrega única en nuestro centro operativo de Hoxton"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
-                        <span>ARTB2B manages storage and venue coordination</span>
+                        <span>
+                          {tr(
+                            "ARTB2B manages storage and venue coordination",
+                            "ARTB2B gestiona el almacenamiento y la coordinación con los espacios"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
-                        <span>Transport from Hoxton hub to participating venues included</span>
+                        <span>
+                          {tr(
+                            "Transport from Hoxton hub to participating venues included",
+                            "Transporte desde el centro de Hoxton a los espacios incluido"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
-                        <span>Professional installation and regular artwork rotation</span>
+                        <span>
+                          {tr(
+                            "Professional installation and regular artwork rotation",
+                            "Instalación profesional y rotación periódica de obras"
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -203,7 +239,7 @@ export default function Home() {
                       href="/subscriptions"
                       className="text-xs font-bold text-brand-accent hover:underline inline-flex items-center gap-1"
                     >
-                      <span>Compare Subscription plans</span>
+                      <span>{tr("Compare Subscription plans", "Comparar planes de Suscripción")}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -216,25 +252,47 @@ export default function Home() {
                       <Calendar className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-                      Self Managed Booking
+                      {tr("Self Managed Booking", "Reserva Autogestionada")}
                     </span>
-                    <h3 className="font-heading text-2xl font-bold mt-1 mb-4">Pay by Day</h3>
+                    <h3 className="font-heading text-2xl font-bold mt-1 mb-4">
+                      {tr("Pay by Day", "Pago por Día")}
+                    </h3>
                     <ul className="space-y-3 text-xs text-zinc-600 font-sans">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-zinc-950 shrink-0 mt-0.5" />
-                        <span>Book individual exhibition spaces without a monthly plan</span>
+                        <span>
+                          {tr(
+                            "Book individual exhibition spaces without a monthly plan",
+                            "Reserva espacios individuales sin un plan mensual"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-zinc-950 shrink-0 mt-0.5" />
-                        <span>Select your preferred participating venue in the app</span>
+                        <span>
+                          {tr(
+                            "Select your preferred participating venue in the app",
+                            "Selecciona tu espacio participante preferido en la aplicación"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-zinc-950 shrink-0 mt-0.5" />
-                        <span>Artist arranges direct artwork delivery to the venue</span>
+                        <span>
+                          {tr(
+                            "Artist arranges direct artwork delivery to the venue",
+                            "El artista organiza la entrega directa de la obra en el espacio"
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-zinc-950 shrink-0 mt-0.5" />
-                        <span>Artist manages installation, removal and logistics</span>
+                        <span>
+                          {tr(
+                            "Artist manages installation, removal and logistics",
+                            "El artista gestiona la instalación, retirada y logística"
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -243,7 +301,7 @@ export default function Home() {
                       href="/pay-by-day"
                       className="text-xs font-bold text-zinc-950 hover:underline inline-flex items-center gap-1"
                     >
-                      <span>Learn more about Pay by Day</span>
+                      <span>{tr("Learn more about Pay by Day", "Más información sobre Pago por Día")}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -259,13 +317,16 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
               <div className="max-w-2xl">
                 <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-                  Our Network
+                  {tr("Our Network", "Nuestra Red")}
                 </span>
                 <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4 leading-tight">
-                  Art Beyond Traditional Galleries
+                  {tr("Art Beyond Traditional Galleries", "Arte Más Allá de las Galerías Tradicionales")}
                 </h2>
                 <p className="font-sans text-base sm:text-lg text-zinc-600 leading-relaxed">
-                  Discover contemporary art in the places people visit every day. ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery.
+                  {tr(
+                    "Discover contemporary art in the places people visit every day. ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery.",
+                    "Descubre arte contemporáneo en los lugares que la gente visita cada día. ARTB2B conecta artistas y espacios, llevando obras originales a entornos cotidianos y creando nuevas oportunidades de descubrimiento."
+                  )}
                 </p>
               </div>
 
@@ -274,7 +335,7 @@ export default function Home() {
                   href="/network"
                   className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center gap-2"
                 >
-                  <span>Explore Our Network</span>
+                  <span>{tr("Explore Our Network", "Explorar Nuestra Red")}</span>
                   <ArrowRight className="w-4 h-4 text-brand-accent" />
                 </Link>
               </div>
@@ -296,7 +357,7 @@ export default function Home() {
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 rounded-full bg-zinc-950/85 backdrop-blur-sm text-white font-sans text-[10px] font-bold uppercase tracking-wider">
-                        {venue.category}
+                        {tr(venue.category, venue.categoryEs)}
                       </span>
                     </div>
                   </div>
@@ -309,7 +370,7 @@ export default function Home() {
                         {venue.name}
                       </h3>
                       <p className="font-sans text-xs text-zinc-600 leading-relaxed line-clamp-2">
-                        {venue.description}
+                        {tr(venue.description, venue.descriptionEs)}
                       </p>
                     </div>
                     <div className="pt-4 mt-4 border-t border-zinc-100 flex items-center gap-1.5 text-xs text-zinc-500 font-sans">
@@ -326,17 +387,20 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-zinc-400">
-                    Exhibited Across London
+                    {tr("Exhibited Across London", "Expuesto en Londres")}
                   </span>
                   <h3 className="font-heading text-2xl font-bold text-zinc-950 mt-0.5">
-                    Featured Artworks &amp; Artist Credits
+                    {tr(
+                      "Featured Artworks & Artist Credits",
+                      "Obras Destacadas y Créditos de Artistas"
+                    )}
                   </h3>
                 </div>
                 <Link
                   href="/network#artists"
                   className="text-xs font-bold text-zinc-950 hover:underline inline-flex items-center gap-1"
                 >
-                  <span>View all network exhibitions</span>
+                  <span>{tr("View all network exhibitions", "Ver todas las exposiciones")}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -359,7 +423,8 @@ export default function Home() {
                         {item.artworkTitle}
                       </p>
                       <p className="font-sans text-xs text-zinc-600 mt-0.5">
-                        Artist: <span className="font-semibold text-zinc-950">{item.artistName}</span>
+                        {tr("Artist:", "Artista:")}{" "}
+                        <span className="font-semibold text-zinc-950">{item.artistName}</span>
                       </p>
                       <p className="font-sans text-[11px] text-zinc-500 mt-1 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-zinc-400 shrink-0" />
@@ -389,26 +454,29 @@ export default function Home() {
                     </div>
                     <div className="text-left">
                       <p className="font-heading text-xs font-black tracking-wider uppercase text-brand-accent">
-                        Official Member Seal
+                        {tr("Official Member Seal", "Sello Oficial de Miembro")}
                       </p>
                       <p className="font-sans text-[11px] text-zinc-300">
-                        ARTB2B Art Gallery Network
+                        {tr("ARTB2B Art Gallery Network", "Red de Galerías de Arte ARTB2B")}
                       </p>
                     </div>
                   </div>
 
                   <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                    Turn Your Venue Into an Art Gallery
+                    {tr("Turn Your Venue Into an Art Gallery", "Convierte Tu Espacio en una Galería de Arte")}
                   </h2>
                   <p className="font-sans text-base sm:text-lg text-zinc-300 mb-10 leading-relaxed">
-                    Bring original art into your space and become part of the ARTB2B Art Gallery Network. We coordinate artwork selection, installation and rotation, helping you offer guests a changing cultural experience.
+                    {tr(
+                      "Bring original art into your space and become part of the ARTB2B Art Gallery Network. We coordinate artwork selection, installation and rotation, helping you offer guests a changing cultural experience.",
+                      "Lleva arte original a tu espacio y forma parte de la Red de Galerías de Arte ARTB2B. Coordinamos la selección, instalación y rotación de las obras, ayudándote a ofrecer a tus clientes una experiencia cultural en constante renovación."
+                    )}
                   </p>
 
                   <Link
                     href="/for-venues"
                     className="px-8 py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 transition-all font-sans text-sm font-bold inline-flex items-center gap-2 shadow-md"
                   >
-                    <span>For Venues</span>
+                    <span>{tr("For Venues", "Para Espacios")}</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -446,10 +514,13 @@ export default function Home() {
         <section id="final-cta" className="py-20 bg-[#fcfcfd] border-t border-zinc-200/60">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-6 leading-tight">
-              Ready to Exhibit?
+              {tr("Ready to Exhibit?", "¿Listo para Exponer?")}
             </h2>
             <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Join ARTB2B, explore available exhibition options and take the next step with your artwork.
+              {tr(
+                "Join ARTB2B, explore available exhibition options and take the next step with your artwork.",
+                "Únete a ARTB2B, explora las opciones de exposición disponibles y da el siguiente paso con tu obra."
+              )}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a
@@ -458,7 +529,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-lg hover:shadow-xl font-sans text-base font-bold inline-flex items-center justify-center gap-2"
               >
-                <span>Join ARTB2B</span>
+                <span>{tr("Join ARTB2B", "Únete a ARTB2B")}</span>
                 <ArrowUpRight className="w-5 h-5 text-brand-accent" />
               </a>
             </div>

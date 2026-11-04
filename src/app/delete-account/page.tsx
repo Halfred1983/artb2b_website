@@ -4,9 +4,11 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { UserX, ArrowLeft, Mail, AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
+import { UserX, ArrowLeft, AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function DeleteAccountPage() {
+  const { tr } = useLanguage();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -41,10 +43,21 @@ export default function DeleteAccountPage() {
         setIsSubmitted(true);
         setFormData({ firstName: "", lastName: "", email: "", message: "" });
       } else {
-        setErrorMessage(data.error || "Failed to submit request. Please email us directly.");
+        setErrorMessage(
+          data.error ||
+            tr(
+              "Failed to submit request. Please email us directly.",
+              "No se pudo enviar la solicitud. Por favor envíanos un correo directamente."
+            )
+        );
       }
     } catch {
-      setErrorMessage("Network error. Please try again or email us directly.");
+      setErrorMessage(
+        tr(
+          "Network error. Please try again or email us directly.",
+          "Error de red. Por favor inténtalo de nuevo o envíanos un correo directamente."
+        )
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -64,30 +77,40 @@ export default function DeleteAccountPage() {
               className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-zinc-950 uppercase tracking-wider mb-8 transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              Back to Home
+              {tr("Back to Home", "Volver al Inicio")}
             </Link>
 
             <span className="px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-700 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-flex items-center gap-1.5">
               <UserX className="w-3.5 h-3.5 text-red-600" />
-              Account & Privacy
+              {tr("Account & Privacy", "Cuenta y Privacidad")}
             </span>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-black tracking-tight text-zinc-950 mt-4 mb-4">
-              Delete your account
+              {tr("Delete your account", "Eliminar tu cuenta")}
             </h1>
 
             <p className="font-sans text-base text-zinc-600 leading-relaxed max-w-2xl">
-              If you would like to delete your account, you can do so by completing the form below. Alternatively, you can contact our customer service at{" "}
+              {tr(
+                "If you would like to delete your account, you can do so by completing the form below. Alternatively, you can contact our customer service at",
+                "Si deseas eliminar tu cuenta, puedes hacerlo completando el formulario a continuación. Alternativamente, puedes contactar con nuestro servicio de atención al cliente en"
+              )}{" "}
               <a href="mailto:info@artb2b.art" className="text-zinc-950 font-bold underline hover:text-brand-accent-hover">
                 info@artb2b.art
               </a>
-              , providing your full name and the email associated with your account.
+              {tr(
+                ", providing your full name and the email associated with your account.",
+                ", indicando tu nombre completo y el correo electrónico asociado a tu cuenta."
+              )}
             </p>
 
             <div className="mt-6 flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-2xl text-amber-900 text-xs sm:text-sm leading-relaxed">
               <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <span>
-                <strong>Important:</strong> Please note that all your data, including booking history and any uploaded images, will be permanently deleted once the request is processed.
+                <strong>{tr("Important:", "Importante:")}</strong>{" "}
+                {tr(
+                  "Please note that all your data, including booking history and any uploaded images, will be permanently deleted once the request is processed.",
+                  "Ten en cuenta que todos tus datos, incluido el historial de reservas y cualquier imagen subida, se eliminarán de forma permanente una vez procesada la solicitud."
+                )}
               </span>
             </div>
           </div>
@@ -102,9 +125,14 @@ export default function DeleteAccountPage() {
                   <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-200">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="font-heading text-2xl font-bold text-zinc-950 mb-2">Request Received</h3>
+                  <h3 className="font-heading text-2xl font-bold text-zinc-950 mb-2">
+                    {tr("Request Received", "Solicitud Recibida")}
+                  </h3>
                   <p className="text-sm text-zinc-600 max-w-md leading-relaxed">
-                    Your account deletion request has been submitted. Our team will verify your identity and process the permanent deletion of your account and associated data within 48 hours.
+                    {tr(
+                      "Your account deletion request has been submitted. Our team will verify your identity and process the permanent deletion of your account and associated data within 48 hours.",
+                      "Tu solicitud de eliminación de cuenta ha sido enviada. Nuestro equipo verificará tu identidad y procesará la eliminación permanente de tu cuenta y los datos asociados en un plazo de 48 horas."
+                    )}
                   </p>
                 </div>
               ) : (
@@ -112,12 +140,12 @@ export default function DeleteAccountPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                        First name <span className="text-red-500">*</span>
+                        {tr("First name", "Nombre")} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="John"
+                        placeholder={tr("John", "Juan")}
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         className="bg-zinc-50 border border-zinc-200 focus:border-zinc-950 focus:bg-white focus:outline-none rounded-2xl p-4 text-sm text-zinc-900 transition-colors"
@@ -126,12 +154,12 @@ export default function DeleteAccountPage() {
 
                     <div className="flex flex-col gap-2">
                       <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                        Last name <span className="text-red-500">*</span>
+                        {tr("Last name", "Apellido")} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="Doe"
+                        placeholder={tr("Doe", "Pérez")}
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         className="bg-zinc-50 border border-zinc-200 focus:border-zinc-950 focus:bg-white focus:outline-none rounded-2xl p-4 text-sm text-zinc-900 transition-colors"
@@ -141,7 +169,7 @@ export default function DeleteAccountPage() {
 
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                      Account Email <span className="text-red-500">*</span>
+                      {tr("Account Email", "Correo Electrónico de la Cuenta")} <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -155,11 +183,14 @@ export default function DeleteAccountPage() {
 
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                      Optional Notes or Reason
+                      {tr("Optional Notes or Reason", "Notas o Motivo Opcional")}
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Please delete my account and associated data..."
+                      placeholder={tr(
+                        "Please delete my account and associated data...",
+                        "Por favor eliminen mi cuenta y los datos asociados..."
+                      )}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="bg-zinc-50 border border-zinc-200 focus:border-zinc-950 focus:bg-white focus:outline-none rounded-2xl p-4 text-sm text-zinc-900 transition-colors resize-none"
@@ -180,18 +211,18 @@ export default function DeleteAccountPage() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Submitting Request...</span>
+                        <span>{tr("Submitting Request...", "Enviando Solicitud...")}</span>
                       </>
                     ) : (
                       <>
-                        <span>Submit Account Deletion Request</span>
+                        <span>{tr("Submit Account Deletion Request", "Enviar Solicitud de Eliminación de Cuenta")}</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}
                   </button>
 
                   <p className="text-center text-xs text-zinc-400">
-                    Prefer direct email? Send your request to{" "}
+                    {tr("Prefer direct email? Send your request to", "¿Prefieres correo directo? Envía tu solicitud a")}{" "}
                     <a href="mailto:info@artb2b.art?subject=Account%20Deletion%20Request" className="text-zinc-700 font-bold underline">
                       info@artb2b.art
                     </a>

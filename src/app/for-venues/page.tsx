@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
@@ -7,13 +9,14 @@ import {
   ArrowRight,
   Sparkles,
   RefreshCw,
-  CheckCircle2,
   MapPin,
   Building2,
 } from "lucide-react";
 import { VERIFIED_VENUES } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ForVenuesPage() {
+  const { tr } = useLanguage();
   const venueShowcase = VERIFIED_VENUES.slice(0, 6);
 
   return (
@@ -35,20 +38,29 @@ export default function ForVenuesPage() {
                   </div>
                   <div className="text-left">
                     <p className="font-heading text-xs font-black tracking-wider uppercase text-brand-accent">
-                      ARTB2B Art Gallery Network
+                      {tr("ARTB2B Art Gallery Network", "Red de Galerías de Arte ARTB2B")}
                     </p>
                     <p className="font-sans text-[11px] text-zinc-300">
-                      Official Participating Venue Programme
+                      {tr(
+                        "Official Participating Venue Programme",
+                        "Programa Oficial de Espacios Participantes"
+                      )}
                     </p>
                   </div>
                 </div>
 
                 <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.05] mb-6">
-                  Become Part of the ARTB2B Art Gallery Network
+                  {tr(
+                    "Become Part of the ARTB2B Art Gallery Network",
+                    "Forma Parte de la Red de Galerías de Arte ARTB2B"
+                  )}
                 </h1>
 
                 <p className="font-sans text-base sm:text-lg text-zinc-300 max-w-xl mb-10 leading-relaxed">
-                  Transform your venue into a place where people discover original art. ARTB2B works with participating venues to coordinate artwork displays and regular rotations, bringing new creative energy to everyday spaces.
+                  {tr(
+                    "Transform your venue into a place where people discover original art. ARTB2B works with participating venues to coordinate artwork displays and regular rotations, bringing new creative energy to everyday spaces.",
+                    "Transforma tu espacio en un lugar donde las personas descubran arte original. ARTB2B colabora con los espacios participantes para coordinar las exposiciones de obras y sus rotaciones periódicas, aportando nueva energía creativa a lugares cotidianos."
+                  )}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -56,7 +68,7 @@ export default function ForVenuesPage() {
                     href="#partner-form"
                     className="px-8 py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 transition-all font-sans text-sm font-bold inline-flex items-center justify-center gap-2 shadow-lg"
                   >
-                    <span>Partner With Us</span>
+                    <span>{tr("Partner With Us", "Colabora con Nosotros")}</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
 
@@ -64,7 +76,9 @@ export default function ForVenuesPage() {
                     href="/network"
                     className="px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                   >
-                    <span>Explore Participating Venues</span>
+                    <span>
+                      {tr("Explore Participating Venues", "Explorar Espacios Participantes")}
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -102,13 +116,19 @@ export default function ForVenuesPage() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-                Why Partner With ARTB2B
+                {tr("Why Partner With ARTB2B", "Por Qué Colaborar con ARTB2B")}
               </span>
               <h2 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4 leading-tight">
-                A Changing Cultural Experience for Your Guests
+                {tr(
+                  "A Changing Cultural Experience for Your Guests",
+                  "Una Experiencia Cultural en Constante Renovación para Tus Clientes"
+                )}
               </h2>
               <p className="font-sans text-base text-zinc-600 leading-relaxed">
-                Designed for cafés, restaurants, bars, hotels, creative workspaces and cultural destinations across London.
+                {tr(
+                  "Designed for cafés, restaurants, bars, hotels, creative workspaces and cultural destinations across London.",
+                  "Diseñado para cafeterías, restaurantes, bares, hoteles, espacios de trabajo creativos y destinos culturales."
+                )}
               </p>
             </div>
 
@@ -118,10 +138,13 @@ export default function ForVenuesPage() {
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mb-3">
-                  Curated Original Art
+                  {tr("Curated Original Art", "Arte Original Seleccionado")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  We coordinate artwork selection tailored to the character and aesthetic of your space, enriching your interior with original contemporary art.
+                  {tr(
+                    "We coordinate artwork selection tailored to the character and aesthetic of your space, enriching your interior with original contemporary art.",
+                    "Coordinamos la selección de obras adaptadas al carácter y la estética de tu local, enriqueciendo tu interior con arte contemporáneo original."
+                  )}
                 </p>
               </div>
 
@@ -130,10 +153,13 @@ export default function ForVenuesPage() {
                   <RefreshCw className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mb-3">
-                  Managed Installation &amp; Rotation
+                  {tr("Managed Installation & Rotation", "Instalación y Rotación Gestionadas")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  For Subscription exhibitions, our team manages delivery from our Hoxton hub, professional installation and regular artwork rotations so your walls stay fresh.
+                  {tr(
+                    "For Subscription exhibitions, our team manages delivery from our Hoxton hub, professional installation and regular artwork rotations so your walls stay fresh.",
+                    "Para las exposiciones de Suscripción, nuestro equipo gestiona la entrega desde nuestro centro en Hoxton, la instalación profesional y las rotaciones periódicas de obras."
+                  )}
                 </p>
               </div>
 
@@ -142,10 +168,13 @@ export default function ForVenuesPage() {
                   <Building2 className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mb-3">
-                  Network Visibility
+                  {tr("Network Visibility", "Visibilidad en la Red")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  Your venue is featured in the ARTB2B app and website network, introducing art lovers and local visitors to your space.
+                  {tr(
+                    "Your venue is featured in the ARTB2B app and website network, introducing art lovers and local visitors to your space.",
+                    "Tu espacio aparece destacado en la aplicación y en la web de ARTB2B, acercando a amantes del arte y visitantes locales a tu negocio."
+                  )}
                 </p>
               </div>
             </div>
@@ -155,17 +184,19 @@ export default function ForVenuesPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                    Current Partners
+                    {tr("Current Partners", "Socios Actuales")}
                   </span>
                   <h3 className="font-heading text-2xl sm:text-3xl font-bold text-zinc-950 mt-1">
-                    Venues in the ARTB2B Network
+                    {tr("Venues in the ARTB2B Network", "Espacios en la Red ARTB2B")}
                   </h3>
                 </div>
                 <Link
                   href="/network"
                   className="text-xs font-bold text-zinc-950 hover:underline inline-flex items-center gap-1"
                 >
-                  <span>See all participating venues</span>
+                  <span>
+                    {tr("See all participating venues", "Ver todos los espacios participantes")}
+                  </span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -186,13 +217,13 @@ export default function ForVenuesPage() {
                     <div className="p-5 flex-grow flex flex-col justify-between">
                       <div>
                         <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                          {venue.category}
+                          {tr(venue.category, venue.categoryEs)}
                         </span>
                         <h4 className="font-heading text-lg font-bold text-zinc-950 mt-0.5">
                           {venue.name}
                         </h4>
                         <p className="font-sans text-xs text-zinc-600 mt-1 line-clamp-2">
-                          {venue.description}
+                          {tr(venue.description, venue.descriptionEs)}
                         </p>
                       </div>
                       <p className="font-sans text-[11px] text-zinc-500 mt-4 pt-3 border-t border-zinc-200/60 flex items-center gap-1">

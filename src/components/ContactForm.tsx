@@ -11,12 +11,14 @@ import {
   Loader2,
   Award,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ContactFormProps {
   defaultRole?: "artist" | "venue" | "ambassador" | "other";
 }
 
 export default function ContactForm({ defaultRole = "venue" }: ContactFormProps) {
+  const { tr } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -50,17 +52,31 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
           setFormSubmitted(false);
         }, 6000);
       } else {
-        setErrorMessage(data.error || "Failed to submit inquiry. Please try again.");
+        setErrorMessage(
+          data.error ||
+            tr(
+              "Failed to submit inquiry. Please try again.",
+              "No se pudo enviar la consulta. Por favor, inténtalo de nuevo."
+            )
+        );
       }
     } catch {
-      setErrorMessage("Network error. Please check your connection and try again.");
+      setErrorMessage(
+        tr(
+          "Network error. Please check your connection and try again.",
+          "Error de red. Por favor, comprueba tu conexión e inténtalo de nuevo."
+        )
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="partner-form" className="py-24 bg-white relative overflow-hidden border-t border-zinc-200/60">
+    <section
+      id="partner-form"
+      className="py-24 bg-white relative overflow-hidden border-t border-zinc-200/60"
+    >
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-10 right-0 w-[300px] h-[300px] bg-zinc-100 rounded-full blur-3xl -z-10" />
 
@@ -70,13 +86,16 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
           <div className="lg:col-span-5 flex flex-col items-start text-left">
             <span className="px-3 py-1.5 rounded-full bg-brand-accent/15 border border-brand-accent/30 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-zinc-950" />
-              Get in Touch
+              {tr("Get in Touch", "Contacto")}
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-none mb-6">
-              Partner With ARTB2B
+              {tr("Partner With ARTB2B", "Colabora con ARTB2B")}
             </h2>
             <p className="font-sans text-base text-zinc-600 max-w-lg mb-10 leading-relaxed">
-              Whether you are a venue looking to join the ARTB2B Art Gallery Network or an artist exploring our Subscription and Pay by Day exhibition options, our team is ready to help.
+              {tr(
+                "Whether you are a venue looking to join the ARTB2B Art Gallery Network or an artist exploring our Subscription and Pay by Day exhibition options, our team is ready to help.",
+                "Tanto si eres un espacio que desea unirse a la Red de Galerías de Arte ARTB2B como si eres un artista que explora nuestras opciones de Suscripción y Pago por Día, nuestro equipo está listo para ayudarte."
+              )}
             </p>
 
             {/* Quick Benefits list */}
@@ -86,9 +105,14 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   <Building2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-zinc-950 mb-1">For Participating Venues</h4>
+                  <h4 className="text-sm font-bold text-zinc-950 mb-1">
+                    {tr("For Participating Venues", "Para Espacios Participantes")}
+                  </h4>
                   <p className="text-xs text-zinc-500 leading-relaxed">
-                    Transform your venue into a place where people discover original art. ARTB2B coordinates artwork selection, installation and regular rotations.
+                    {tr(
+                      "Transform your venue into a place where people discover original art. ARTB2B coordinates artwork selection, installation and regular rotations.",
+                      "Transforma tu espacio en un lugar donde las personas descubran arte original. ARTB2B coordina la selección de obras, la instalación y las rotaciones periódicas."
+                    )}
                   </p>
                 </div>
               </div>
@@ -98,9 +122,14 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   <Paintbrush className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-zinc-950 mb-1">For Visual Artists</h4>
+                  <h4 className="text-sm font-bold text-zinc-950 mb-1">
+                    {tr("For Visual Artists", "Para Artistas Visuales")}
+                  </h4>
                   <p className="text-xs text-zinc-500 leading-relaxed">
-                    Exhibit across cafés, restaurants, hotels and creative spaces with a managed Subscription from our Hoxton hub or flexible Pay by Day bookings.
+                    {tr(
+                      "Exhibit across cafés, restaurants, hotels and creative spaces with a managed Subscription from our Hoxton hub or flexible Pay by Day bookings.",
+                      "Expón en cafeterías, restaurantes, hoteles y espacios creativos con una Suscripción gestionada desde nuestro centro de Hoxton o con reservas flexibles de Pago por Día."
+                    )}
                   </p>
                 </div>
               </div>
@@ -117,9 +146,14 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center mb-4 border border-emerald-100">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-zinc-950">Message Sent Successfully</h3>
+                  <h3 className="text-xl font-bold text-zinc-950">
+                    {tr("Message Sent Successfully", "Mensaje Enviado con Éxito")}
+                  </h3>
                   <p className="text-sm text-zinc-500 mt-2 max-w-[280px] mx-auto leading-relaxed">
-                    Our curatorial and partnerships team will review your details and connect with you shortly.
+                    {tr(
+                      "Our curatorial and partnerships team will review your details and connect with you shortly.",
+                      "Nuestro equipo curatorial y de alianzas revisará tus datos y se pondrá en contacto contigo en breve."
+                    )}
                   </p>
                 </div>
               ) : (
@@ -127,12 +161,12 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                        Full Name
+                        {tr("Full Name", "Nombre Completo")}
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="Your name"
+                        placeholder={tr("Your name", "Tu nombre")}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="bg-white border border-zinc-200 focus:border-zinc-950 focus:outline-none rounded-2xl p-4 text-sm text-zinc-900 placeholder-zinc-400 transition-colors shadow-sm"
@@ -141,12 +175,12 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
 
                     <div className="flex flex-col gap-2">
                       <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                        Email Address
+                        {tr("Email Address", "Correo Electrónico")}
                       </label>
                       <input
                         type="email"
                         required
-                        placeholder="you@example.com"
+                        placeholder={tr("you@example.com", "tu@ejemplo.com")}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="bg-white border border-zinc-200 focus:border-zinc-950 focus:outline-none rounded-2xl p-4 text-sm text-zinc-900 placeholder-zinc-400 transition-colors shadow-sm"
@@ -157,7 +191,7 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   {/* Role Selector */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                      I am inquiring as a
+                      {tr("I am inquiring as a", "Consulto como")}
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-white border border-zinc-200 p-1.5 rounded-2xl shadow-sm">
                       {(["venue", "artist", "ambassador", "other"] as const).map((roleVal) => {
@@ -171,12 +205,12 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                             : HelpCircle;
                         const labelText =
                           roleVal === "artist"
-                            ? "Artist"
+                            ? tr("Artist", "Artista")
                             : roleVal === "venue"
-                            ? "Venue"
+                            ? tr("Venue", "Espacio")
                             : roleVal === "ambassador"
-                            ? "Ambassador"
-                            : "Other";
+                            ? tr("Ambassador", "Embajador")
+                            : tr("Other", "Otro");
                         const isSelected = formData.role === roleVal;
 
                         return (
@@ -201,17 +235,26 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                   {/* Message Input */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500 pl-1">
-                      Tell us more
+                      {tr("Tell us more", "Cuéntanos más")}
                     </label>
                     <textarea
                       rows={4}
                       required
                       placeholder={
                         formData.role === "venue"
-                          ? "Tell us about your venue name, neighbourhood, type of hospitality or creative space and wall areas..."
+                          ? tr(
+                              "Tell us about your venue name, neighbourhood, type of hospitality or creative space and wall areas...",
+                              "Cuéntanos el nombre de tu espacio, barrio, tipo de local o espacio creativo y zonas de pared disponibles..."
+                            )
                           : formData.role === "artist"
-                          ? "Tell us about your artwork medium, dimensions and whether you are interested in Subscriptions or Pay by Day..."
-                          : "Let us know how you would like to collaborate with ARTB2B..."
+                          ? tr(
+                              "Tell us about your artwork medium, dimensions and whether you are interested in Subscriptions or Pay by Day...",
+                              "Cuéntanos sobre tu técnica artística, dimensiones y si te interesan las Suscripciones o el Pago por Día..."
+                            )
+                          : tr(
+                              "Let us know how you would like to collaborate with ARTB2B...",
+                              "Cuéntanos cómo te gustaría colaborar con ARTB2B..."
+                            )
                       }
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -233,11 +276,11 @@ export default function ContactForm({ defaultRole = "venue" }: ContactFormProps)
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-white" />
-                        <span>Sending Inquiry...</span>
+                        <span>{tr("Sending Inquiry...", "Enviando consulta...")}</span>
                       </>
                     ) : (
                       <>
-                        <span>Partner With Us</span>
+                        <span>{tr("Partner With Us", "Colabora con Nosotros")}</span>
                         <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                       </>
                     )}

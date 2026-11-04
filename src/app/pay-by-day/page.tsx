@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,8 +14,10 @@ import {
   CalendarCheck,
 } from "lucide-react";
 import { APP_URL, VERIFIED_VENUES } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PayByDayPage() {
+  const { tr } = useLanguage();
   const sampleVenues = VERIFIED_VENUES.slice(0, 3);
 
   return (
@@ -29,15 +33,18 @@ export default function PayByDayPage() {
             <div className="max-w-3xl mx-auto text-center">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-zinc-950" />
-                Pay by Day
+                {tr("Pay by Day", "Pago por Día")}
               </span>
 
               <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.05] mb-6">
-                A Flexible Way to Exhibit
+                {tr("A Flexible Way to Exhibit", "Una Forma Flexible de Exponer")}
               </h1>
 
               <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Book exhibition opportunities without committing to a monthly Subscription. With Pay by Day, you are responsible for artwork transport, installation, removal and other practical arrangements.
+                {tr(
+                  "Book exhibition opportunities without committing to a monthly Subscription. With Pay by Day, you are responsible for artwork transport, installation, removal and other practical arrangements.",
+                  "Reserva oportunidades de exposición sin comprometerte a una Suscripción mensual. Con Pago por Día, eres responsable del transporte de la obra, la instalación, la retirada y demás gestiones prácticas."
+                )}
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -47,7 +54,7 @@ export default function PayByDayPage() {
                   rel="noopener noreferrer"
                   className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                 >
-                  <span>Find Exhibition Space</span>
+                  <span>{tr("Find Exhibition Space", "Encontrar Espacio de Exposición")}</span>
                   <ArrowUpRight className="w-4 h-4 text-brand-accent" />
                 </a>
 
@@ -55,7 +62,7 @@ export default function PayByDayPage() {
                   href="/subscriptions"
                   className="px-8 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-50 transition-all border border-zinc-200 shadow-sm font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                 >
-                  <span>Compare With Subscriptions</span>
+                  <span>{tr("Compare With Subscriptions", "Comparar con Suscripciones")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -68,10 +75,13 @@ export default function PayByDayPage() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="max-w-2xl mx-auto text-center mb-16">
               <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 mb-4">
-                How Pay by Day Booking Works
+                {tr("How Pay by Day Booking Works", "Cómo Funciona la Reserva de Pago por Día")}
               </h2>
               <p className="font-sans text-base text-zinc-600">
-                Direct space reservation through the ARTB2B app for artists who prefer to manage their own exhibition logistics.
+                {tr(
+                  "Direct space reservation through the ARTB2B app for artists who prefer to manage their own exhibition logistics.",
+                  "Reserva directa de espacios a través de la aplicación ARTB2B para artistas que prefieren gestionar su propia logística de exposición."
+                )}
               </p>
             </div>
 
@@ -81,13 +91,16 @@ export default function PayByDayPage() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-zinc-400">
-                  Step 01
+                  {tr("Step 01", "Paso 01")}
                 </span>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mt-1 mb-3">
-                  Send a Booking Request
+                  {tr("Send a Booking Request", "Envía una Solicitud de Reserva")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  Explore participating venues in the ARTB2B app and send booking requests for available exhibition spaces and dates.
+                  {tr(
+                    "Explore participating venues in the ARTB2B app and send booking requests for available exhibition spaces and dates.",
+                    "Explora los espacios participantes en la aplicación ARTB2B y envía solicitudes de reserva para las fechas y espacios disponibles."
+                  )}
                 </p>
               </div>
 
@@ -96,13 +109,16 @@ export default function PayByDayPage() {
                   <CalendarCheck className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-zinc-400">
-                  Step 02
+                  {tr("Step 02", "Paso 02")}
                 </span>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mt-1 mb-3">
-                  Venue Confirmation
+                  {tr("Venue Confirmation", "Confirmación del Espacio")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  Venues review and approve or decline booking requests. Once confirmed, the exhibition is added to both the artist and venue calendar in the app.
+                  {tr(
+                    "Venues review and approve or decline booking requests. Once confirmed, the exhibition is added to both the artist and venue calendar in the app.",
+                    "Los espacios revisan y aprueban o rechazan las solicitudes. Una vez confirmada, la exposición se añade al calendario del artista y del espacio en la aplicación."
+                  )}
                 </p>
               </div>
 
@@ -111,13 +127,16 @@ export default function PayByDayPage() {
                   <Truck className="w-5 h-5" />
                 </div>
                 <span className="text-xs font-extrabold uppercase tracking-wider text-zinc-400">
-                  Step 03
+                  {tr("Step 03", "Paso 03")}
                 </span>
                 <h3 className="font-heading text-xl font-bold text-zinc-950 mt-1 mb-3">
-                  Artist Managed Logistics
+                  {tr("Artist Managed Logistics", "Logística Gestionada por el Artista")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-600 leading-relaxed">
-                  You transport your artwork directly to the venue on check in day, install it in the allocated space, and collect your artwork at the end of the exhibition.
+                  {tr(
+                    "You transport your artwork directly to the venue on check in day, install it in the allocated space, and collect your artwork at the end of the exhibition.",
+                    "Transportas tu obra directamente al espacio el día de inicio, la instalas en el lugar asignado y la recoges al finalizar la exposición."
+                  )}
                 </p>
               </div>
             </div>
@@ -129,10 +148,16 @@ export default function PayByDayPage() {
           <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950 mb-4">
-                Pay by Day vs Managed Subscription
+                {tr(
+                  "Pay by Day vs Managed Subscription",
+                  "Pago por Día vs Suscripción Gestionada"
+                )}
               </h2>
               <p className="font-sans text-base text-zinc-600">
-                Understand the practical differences before selecting how you exhibit.
+                {tr(
+                  "Understand the practical differences before selecting how you exhibit.",
+                  "Conoce las diferencias prácticas antes de elegir cómo exponer."
+                )}
               </p>
             </div>
 
@@ -145,27 +170,54 @@ export default function PayByDayPage() {
                       <Calendar className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-heading text-2xl font-black text-zinc-950">Pay by Day</h3>
-                      <p className="font-sans text-xs text-zinc-500">One off self managed exhibitions</p>
+                      <h3 className="font-heading text-2xl font-black text-zinc-950">
+                        {tr("Pay by Day", "Pago por Día")}
+                      </h3>
+                      <p className="font-sans text-xs text-zinc-500">
+                        {tr(
+                          "One off self managed exhibitions",
+                          "Exposiciones puntuales autogestionadas"
+                        )}
+                      </p>
                     </div>
                   </div>
 
                   <ul className="space-y-4 font-sans text-sm text-zinc-700 mb-8">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Book individual exhibition periods without a monthly Subscription</span>
+                      <span>
+                        {tr(
+                          "Book individual exhibition periods without a monthly Subscription",
+                          "Reserva periodos individuales de exposición sin una Suscripción mensual"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Artist manages transport directly to and from the venue</span>
+                      <span>
+                        {tr(
+                          "Artist manages transport directly to and from the venue",
+                          "El artista gestiona el transporte directamente hacia y desde el espacio"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Artist handles installation and removal at the venue</span>
+                      <span>
+                        {tr(
+                          "Artist handles installation and removal at the venue",
+                          "El artista se encarga de la instalación y retirada en el espacio"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Bookings subject to individual venue approval</span>
+                      <span>
+                        {tr(
+                          "Bookings subject to individual venue approval",
+                          "Reservas sujetas a la aprobación de cada espacio"
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -176,7 +228,7 @@ export default function PayByDayPage() {
                   rel="noopener noreferrer"
                   className="w-full py-4 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white font-sans text-sm font-bold text-center transition-colors inline-flex items-center justify-center gap-2"
                 >
-                  <span>Find Exhibition Space</span>
+                  <span>{tr("Find Exhibition Space", "Encontrar Espacio de Exposición")}</span>
                   <ArrowUpRight className="w-4 h-4 text-brand-accent" />
                 </a>
               </div>
@@ -190,10 +242,13 @@ export default function PayByDayPage() {
                     </div>
                     <div>
                       <h3 className="font-heading text-2xl font-black text-white">
-                        ARTB2B Subscription
+                        {tr("ARTB2B Subscription", "Suscripción ARTB2B")}
                       </h3>
                       <p className="font-sans text-xs text-brand-accent">
-                        Continuous managed exhibition service
+                        {tr(
+                          "Continuous managed exhibition service",
+                          "Servicio continuo de exposición gestionada"
+                        )}
                       </p>
                     </div>
                   </div>
@@ -201,19 +256,39 @@ export default function PayByDayPage() {
                   <ul className="space-y-4 font-sans text-sm text-zinc-300 mb-8">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Choose 1, 2, 3 or 4 spaces (1 × 1 m each) from £100/month</span>
+                      <span>
+                        {tr(
+                          "Choose 1, 2, 3 or 4 spaces (1 × 1 m each) from £100/month",
+                          "Elige 1, 2, 3 o 4 espacios (1 × 1 m cada uno) desde £100/mes"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Deliver once to our operational hub in Hoxton</span>
+                      <span>
+                        {tr(
+                          "Deliver once to our operational hub in Hoxton",
+                          "Entrega única en nuestro centro operativo en Hoxton"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>ARTB2B manages storage, transport to venues and installation</span>
+                      <span>
+                        {tr(
+                          "ARTB2B manages storage, transport to venues and installation",
+                          "ARTB2B gestiona el almacenamiento, el transporte a los espacios y la instalación"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Curatorial coordination and regular artwork rotation included</span>
+                      <span>
+                        {tr(
+                          "Curatorial coordination and regular artwork rotation included",
+                          "Coordinación curatorial y rotación periódica de obras incluidas"
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -222,7 +297,7 @@ export default function PayByDayPage() {
                   href="/subscriptions"
                   className="w-full py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 font-sans text-sm font-bold text-center transition-colors inline-flex items-center justify-center gap-2"
                 >
-                  <span>View Subscription Plans</span>
+                  <span>{tr("View Subscription Plans", "Ver Planes de Suscripción")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -231,7 +306,10 @@ export default function PayByDayPage() {
             {/* Participating Venues Preview */}
             <div className="text-center mb-10">
               <h3 className="font-heading text-2xl font-bold text-zinc-950">
-                Explore Participating Venues in the App
+                {tr(
+                  "Explore Participating Venues in the App",
+                  "Explora los Espacios Participantes en la App"
+                )}
               </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

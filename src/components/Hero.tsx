@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { VERIFIED_VENUES, VERIFIED_PLACEMENTS } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { tr } = useLanguage();
   const heroVenue = VERIFIED_VENUES[0]; // Mercato Mayfair
   const secondaryVenue = VERIFIED_VENUES[2]; // Bantof Soho
   const featuredPlacement = VERIFIED_PLACEMENTS[0]; // Brevevita Letters at Luxxdesign
@@ -19,19 +23,31 @@ export default function Hero() {
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6">
               <Sparkles className="w-3.5 h-3.5 text-zinc-950" />
-              ARTB2B Exhibition Network · London Hub
+              {tr(
+                "ARTB2B Exhibition Network · London Hub",
+                "Red de Exposiciones ARTB2B · Centro de Londres"
+              )}
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.03] mb-6">
-              Your Art. More Spaces. More Opportunities.
+              {tr(
+                "Your Art. More Spaces. More Opportunities.",
+                "Tu Arte. Más Espacios. Más Oportunidades."
+              )}
             </h1>
 
             <div className="font-sans text-base sm:text-lg text-zinc-600 max-w-xl mb-10 leading-relaxed space-y-4">
               <p>
-                Exhibit your artwork across a growing network of cafés, restaurants, hotels and creative venues.
+                {tr(
+                  "Exhibit your artwork across a growing network of cafés, restaurants, hotels and creative venues.",
+                  "Expón tu obra en una red en constante crecimiento de cafeterías, restaurantes, hoteles y espacios creativos."
+                )}
               </p>
               <p>
-                Choose a flexible way to exhibit. With an ARTB2B Subscription, we manage storage, transport from our Hoxton hub, installation and artwork rotation, so you can focus on creating.
+                {tr(
+                  "Choose a flexible way to exhibit. With an ARTB2B Subscription, we manage storage, transport from our Hoxton hub, installation and artwork rotation, so you can focus on creating.",
+                  "Elige una forma flexible de exponer. Con una Suscripción ARTB2B, gestionamos el almacenamiento, el transporte desde nuestro centro en Hoxton, la instalación y la rotación de las obras, para que puedas concentrarte en crear."
+                )}
               </p>
             </div>
 
@@ -41,7 +57,7 @@ export default function Hero() {
                 href="/subscriptions"
                 className="px-7 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl hover:-translate-y-0.5 font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
               >
-                <span>Explore Subscriptions</span>
+                <span>{tr("Explore Subscriptions", "Explorar Suscripciones")}</span>
                 <ArrowRight className="w-4 h-4 text-brand-accent" />
               </Link>
 
@@ -49,7 +65,7 @@ export default function Hero() {
                 href="/#how-it-works"
                 className="px-7 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-50 transition-all border border-zinc-200 shadow-sm hover:shadow-md font-sans text-sm font-bold inline-flex items-center justify-center"
               >
-                How It Works
+                {tr("How It Works", "Cómo Funciona")}
               </Link>
             </div>
 
@@ -57,19 +73,39 @@ export default function Hero() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full pt-6 border-t border-zinc-200/70 text-xs font-sans text-zinc-600">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-zinc-950 fill-brand-accent shrink-0" />
-                <span>1 × 1 m managed exhibition spaces</span>
+                <span>
+                  {tr(
+                    "1 × 1 m managed exhibition spaces",
+                    "Espacios de exposición gestionados de 1 × 1 m"
+                  )}
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-zinc-950 fill-brand-accent shrink-0" />
-                <span>Hoxton operational hub in London</span>
+                <span>
+                  {tr(
+                    "Hoxton operational hub in London",
+                    "Centro operativo en Hoxton, Londres"
+                  )}
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-zinc-950 fill-brand-accent shrink-0" />
-                <span>Curated placement &amp; artwork rotation</span>
+                <span>
+                  {tr(
+                    "Curated placement & artwork rotation",
+                    "Selección curatorial y rotación de obras"
+                  )}
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-zinc-950 fill-brand-accent shrink-0" />
-                <span>Flexible Pay by Day option available</span>
+                <span>
+                  {tr(
+                    "Flexible Pay by Day option available",
+                    "Opción flexible de Pago por Día disponible"
+                  )}
+                </span>
               </div>
             </div>
           </div>
@@ -87,7 +123,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-brand-accent text-zinc-950 font-sans text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
-                    Participating Venue
+                    {tr("Participating Venue", "Espacio Participante")}
                   </span>
                 </div>
                 <div className="absolute bottom-5 left-5 right-5 text-white">
@@ -125,7 +161,7 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/25 to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className="px-2.5 py-0.5 rounded-full bg-white/90 text-zinc-950 font-sans text-[9px] font-bold uppercase tracking-wider">
-                      Exhibited Artwork
+                      {tr("Exhibited Artwork", "Obra Expuesta")}
                     </span>
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -133,10 +169,13 @@ export default function Hero() {
                       {featuredPlacement.artworkTitle}
                     </p>
                     <p className="font-sans text-[11px] text-zinc-300 mt-0.5">
-                      Artist: <span className="text-brand-accent font-semibold">{featuredPlacement.artistName}</span>
+                      {tr("Artist:", "Artista:")}{" "}
+                      <span className="text-brand-accent font-semibold">
+                        {featuredPlacement.artistName}
+                      </span>
                     </p>
                     <p className="font-sans text-[10px] text-zinc-400">
-                      at {featuredPlacement.venueName}
+                      {tr("at", "en")} {featuredPlacement.venueName}
                     </p>
                   </div>
                 </div>

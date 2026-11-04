@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -13,11 +15,20 @@ import {
   APP_REGISTER_URL,
   SUBSCRIPTION_PLANS,
   SUBSCRIPTION_INCLUDED_ITEMS,
+  SUBSCRIPTION_INCLUDED_ITEMS_ES,
   SUBSCRIPTION_NOT_INCLUDED_ITEMS,
+  SUBSCRIPTION_NOT_INCLUDED_ITEMS_ES,
   SUBSCRIPTION_TERMS,
+  SUBSCRIPTION_TERMS_ES,
 } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function SubscriptionsPage() {
+  const { tr } = useLanguage();
+  const includedItems = tr(SUBSCRIPTION_INCLUDED_ITEMS, SUBSCRIPTION_INCLUDED_ITEMS_ES);
+  const notIncludedItems = tr(SUBSCRIPTION_NOT_INCLUDED_ITEMS, SUBSCRIPTION_NOT_INCLUDED_ITEMS_ES);
+  const termsList = tr(SUBSCRIPTION_TERMS, SUBSCRIPTION_TERMS_ES);
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfcfd]">
       <Navbar />
@@ -31,103 +42,115 @@ export default function SubscriptionsPage() {
             <div className="max-w-3xl mx-auto text-center mb-16">
               <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5 text-zinc-950" />
-                ARTB2B Subscriptions
+                {tr("ARTB2B Subscriptions", "Suscripciones ARTB2B")}
               </span>
 
               <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.05] mb-6">
-                Exhibit Continuously. We Handle the Details.
+                {tr(
+                  "Exhibit Continuously. We Handle the Details.",
+                  "Expón de Forma Continua. Nosotros Nos Encargamos de Todo."
+                )}
               </h1>
 
               <p className="font-sans text-base sm:text-lg text-zinc-600 leading-relaxed">
-                Choose one, two, three or four exhibition spaces, each measuring 1 × 1 m. Your monthly Subscription includes storage, curatorial coordination, transportation from our Hoxton hub to venues, installation and artwork rotation.
+                {tr(
+                  "Choose one, two, three or four exhibition spaces, each measuring 1 × 1 m. Your monthly Subscription includes storage, curatorial coordination, transportation from our Hoxton hub to venues, installation and artwork rotation.",
+                  "Elige uno, dos, tres o cuatro espacios de exposición de 1 × 1 m cada uno. Tu Suscripción mensual incluye almacenamiento, coordinación curatorial, transporte desde nuestro centro en Hoxton a los espacios, instalación y rotación de obras."
+                )}
               </p>
             </div>
 
             {/* Four Plan Cards with Verified Prices from the Live App */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {SUBSCRIPTION_PLANS.map((plan) => (
-                <div
-                  key={plan.id}
-                  id={plan.id}
-                  className={`relative rounded-[2.25rem] p-8 flex flex-col justify-between border transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-zinc-950 text-white border-zinc-950 shadow-2xl lg:scale-[1.03]"
-                      : "bg-white text-zinc-950 border-zinc-200/80 hover:border-zinc-950 shadow-sm hover:shadow-xl"
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-4 min-h-[28px]">
-                      <span
-                        className={`text-xs font-bold uppercase tracking-wider ${
-                          plan.popular ? "text-zinc-400" : "text-zinc-500"
-                        }`}
-                      >
-                        {plan.spaces} × (1 × 1 m)
-                      </span>
-                      {plan.badge && (
-                        <span
-                          className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
-                            plan.popular
-                              ? "bg-brand-accent text-zinc-950"
-                              : "bg-zinc-100 text-zinc-800 border border-zinc-200"
-                          }`}
-                        >
-                          {plan.badge}
-                        </span>
-                      )}
-                    </div>
-
-                    <h2 className="font-heading text-2xl font-black mb-1">{plan.name}</h2>
-                    <p
-                      className={`font-sans text-xs mb-6 ${
-                        plan.popular ? "text-zinc-400" : "text-zinc-500"
-                      }`}
-                    >
-                      {plan.unitPrice}
-                    </p>
-
-                    <div className="flex items-baseline gap-1 mb-8 pb-6 border-b border-zinc-200/20">
-                      <span className="font-heading text-5xl font-black">{plan.price}</span>
-                      <span
-                        className={`font-sans text-xs font-semibold ${
-                          plan.popular ? "text-zinc-400" : "text-zinc-500"
-                        }`}
-                      >
-                        / month
-                      </span>
-                    </div>
-
-                    <ul className="space-y-3.5 mb-8">
-                      {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs font-sans">
-                          <CheckCircle2
-                            className={`w-4 h-4 shrink-0 mt-0.5 ${
-                              plan.popular ? "text-brand-accent" : "text-zinc-950"
-                            }`}
-                          />
-                          <span className={plan.popular ? "text-zinc-200" : "text-zinc-600"}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <a
-                    href={APP_REGISTER_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full py-4 rounded-2xl font-sans text-xs font-bold uppercase tracking-wider text-center transition-all inline-flex items-center justify-center gap-1.5 ${
+              {SUBSCRIPTION_PLANS.map((plan) => {
+                const badgeText = tr(plan.badge, plan.badgeEs);
+                const featuresList = tr(plan.features, plan.featuresEs);
+                return (
+                  <div
+                    key={plan.id}
+                    id={plan.id}
+                    className={`relative rounded-[2.25rem] p-8 flex flex-col justify-between border transition-all duration-300 ${
                       plan.popular
-                        ? "bg-brand-accent text-zinc-950 hover:bg-brand-accent-hover shadow-md"
-                        : "bg-zinc-950 text-white hover:bg-zinc-800"
+                        ? "bg-zinc-950 text-white border-zinc-950 shadow-2xl lg:scale-[1.03]"
+                        : "bg-white text-zinc-950 border-zinc-200/80 hover:border-zinc-950 shadow-sm hover:shadow-xl"
                     }`}
                   >
-                    <span>Select Plan</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </div>
-              ))}
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-4 min-h-[28px]">
+                        <span
+                          className={`text-xs font-bold uppercase tracking-wider ${
+                            plan.popular ? "text-zinc-400" : "text-zinc-500"
+                          }`}
+                        >
+                          {plan.spaces} × (1 × 1 m)
+                        </span>
+                        {badgeText && (
+                          <span
+                            className={`px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${
+                              plan.popular
+                                ? "bg-brand-accent text-zinc-950"
+                                : "bg-zinc-100 text-zinc-800 border border-zinc-200"
+                            }`}
+                          >
+                            {badgeText}
+                          </span>
+                        )}
+                      </div>
+
+                      <h2 className="font-heading text-2xl font-black mb-1">
+                        {tr(plan.name, plan.nameEs)}
+                      </h2>
+                      <p
+                        className={`font-sans text-xs mb-6 ${
+                          plan.popular ? "text-zinc-400" : "text-zinc-500"
+                        }`}
+                      >
+                        {tr(plan.unitPrice, plan.unitPriceEs)}
+                      </p>
+
+                      <div className="flex items-baseline gap-1 mb-8 pb-6 border-b border-zinc-200/20">
+                        <span className="font-heading text-5xl font-black">{plan.price}</span>
+                        <span
+                          className={`font-sans text-xs font-semibold ${
+                            plan.popular ? "text-zinc-400" : "text-zinc-500"
+                          }`}
+                        >
+                          {tr("/ month", "/ mes")}
+                        </span>
+                      </div>
+
+                      <ul className="space-y-3.5 mb-8">
+                        {featuresList.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5 text-xs font-sans">
+                            <CheckCircle2
+                              className={`w-4 h-4 shrink-0 mt-0.5 ${
+                                plan.popular ? "text-brand-accent" : "text-zinc-950"
+                              }`}
+                            />
+                            <span className={plan.popular ? "text-zinc-200" : "text-zinc-600"}>
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <a
+                      href={APP_REGISTER_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full py-4 rounded-2xl font-sans text-xs font-bold uppercase tracking-wider text-center transition-all inline-flex items-center justify-center gap-1.5 ${
+                        plan.popular
+                          ? "bg-brand-accent text-zinc-950 hover:bg-brand-accent-hover shadow-md"
+                          : "bg-zinc-950 text-white hover:bg-zinc-800"
+                      }`}
+                    >
+                      <span>{tr("Select Plan", "Seleccionar Plan")}</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Included / Not Included / Sales Commission from the App */}
@@ -135,10 +158,13 @@ export default function SubscriptionsPage() {
               {/* What's Included in Every Package */}
               <div className="lg:col-span-7 bg-white rounded-[2.25rem] border border-zinc-200/80 p-8 sm:p-10 shadow-sm">
                 <h3 className="font-heading text-2xl font-bold text-zinc-950 mb-6">
-                  What is included in every Subscription
+                  {tr(
+                    "What is included in every Subscription",
+                    "Qué incluye cada Suscripción"
+                  )}
                 </h3>
                 <ul className="space-y-4">
-                  {SUBSCRIPTION_INCLUDED_ITEMS.map((item, idx) => (
+                  {includedItems.map((item, idx) => (
                     <li
                       key={idx}
                       className="flex items-start gap-3 font-sans text-sm text-zinc-700 leading-relaxed"
@@ -155,10 +181,10 @@ export default function SubscriptionsPage() {
                 {/* Not Included */}
                 <div className="bg-white rounded-[2rem] border border-zinc-200/80 p-8 shadow-sm">
                   <h3 className="font-heading text-xl font-bold text-zinc-950 mb-4">
-                    What is not included
+                    {tr("What is not included", "Qué no está incluido")}
                   </h3>
                   <ul className="space-y-3.5">
-                    {SUBSCRIPTION_NOT_INCLUDED_ITEMS.map((item, idx) => (
+                    {notIncludedItems.map((item, idx) => (
                       <li
                         key={idx}
                         className="flex items-start gap-3 font-sans text-sm text-zinc-600 leading-relaxed"
@@ -177,11 +203,14 @@ export default function SubscriptionsPage() {
                       <Tag className="w-5 h-5" />
                     </div>
                     <h3 className="font-heading text-lg font-bold text-zinc-950">
-                      If your artwork sells
+                      {tr("If your artwork sells", "Si tu obra se vende")}
                     </h3>
                   </div>
                   <p className="font-sans text-sm text-zinc-800 leading-relaxed">
-                    We keep 30% as commission, you keep 70%. You always set the sale price.
+                    {tr(
+                      "We keep 30% as commission, you keep 70%. You always set the sale price.",
+                      "Retenemos el 30% de comisión y tú recibes el 70%. Tú siempre fijas el precio de venta."
+                    )}
                   </p>
                 </div>
 
@@ -189,10 +218,10 @@ export default function SubscriptionsPage() {
                 <div className="bg-zinc-100/80 rounded-[2rem] border border-zinc-200 p-6">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600 mb-3">
                     <Info className="w-4 h-4 text-zinc-950" />
-                    <span>Subscription Terms</span>
+                    <span>{tr("Subscription Terms", "Condiciones de la Suscripción")}</span>
                   </div>
                   <ul className="space-y-2 text-xs text-zinc-600 font-sans">
-                    {SUBSCRIPTION_TERMS.map((term, idx) => (
+                    {termsList.map((term, idx) => (
                       <li key={idx} className="flex items-start gap-2">
                         <span className="font-bold text-zinc-950">•</span>
                         <span>{term}</span>
@@ -215,15 +244,23 @@ export default function SubscriptionsPage() {
                 <div className="max-w-2xl">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-brand-accent font-sans text-xs font-bold uppercase tracking-wider mb-6">
                     <Warehouse className="w-4 h-4" />
-                    <span>Hoxton Operational Hub · London N1</span>
+                    <span>
+                      {tr(
+                        "Hoxton Operational Hub · London N1",
+                        "Centro Operativo de Hoxton · Londres N1"
+                      )}
+                    </span>
                   </div>
 
                   <h2 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                    How Artwork Delivery Works
+                    {tr("How Artwork Delivery Works", "Cómo Funciona la Entrega de Obras")}
                   </h2>
 
                   <p className="font-sans text-base sm:text-lg text-zinc-300 leading-relaxed">
-                    Artists deliver their artwork to the ARTB2B operational hub in Hoxton. From there, ARTB2B manages transportation to participating venues, installation and subsequent artwork rotation as part of the Subscription service.
+                    {tr(
+                      "Artists deliver their artwork to the ARTB2B operational hub in Hoxton. From there, ARTB2B manages transportation to participating venues, installation and subsequent artwork rotation as part of the Subscription service.",
+                      "Los artistas entregan sus obras en el centro operativo de ARTB2B en Hoxton. Desde allí, ARTB2B gestiona el transporte a los espacios participantes, la instalación y la posterior rotación de las obras como parte del servicio de Suscripción."
+                    )}
                   </p>
                 </div>
 
@@ -234,7 +271,7 @@ export default function SubscriptionsPage() {
                     rel="noopener noreferrer"
                     className="w-full lg:w-auto px-9 py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 font-sans text-sm font-bold inline-flex items-center justify-center gap-2 shadow-lg transition-all"
                   >
-                    <span>Join Now</span>
+                    <span>{tr("Join Now", "Únete Ahora")}</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
                 </div>

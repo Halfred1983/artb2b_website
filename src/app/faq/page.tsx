@@ -15,6 +15,7 @@ import {
   Globe,
   MessageSquare,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FAQItem {
   id: string;
@@ -24,87 +25,151 @@ interface FAQItem {
 }
 
 export default function FAQPage() {
-  const [activeCategory, setActiveCategory] = useState<"all" | "general" | "artist" | "venue">("all");
+  const { tr } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState<"all" | "general" | "artist" | "venue">(
+    "all"
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>("subscriptions-vs-paybyday");
 
   const faqs: FAQItem[] = [
     {
       id: "subscriptions-vs-paybyday",
-      question: "What is the difference between an ARTB2B Subscription and Pay by Day?",
+      question: tr(
+        "What is the difference between an ARTB2B Subscription and Pay by Day?",
+        "¿Cuál es la diferencia entre una Suscripción ARTB2B y Pago por Día?"
+      ),
       category: "artist",
       answer: (
         <div className="space-y-4 font-sans text-zinc-600 leading-relaxed">
           <p>
-            <strong>ARTB2B Subscription:</strong> Choose one, two, three or four 1 × 1 m exhibition spaces (£100, £150, £200 or £250 per month). You deliver your approved artwork once to the ARTB2B operational hub in Hoxton. From there, ARTB2B manages storage, curatorial coordination, transportation to participating venues, installation and regular artwork rotation.
+            <strong>{tr("ARTB2B Subscription:", "Suscripción ARTB2B:")}</strong>{" "}
+            {tr(
+              "Choose one, two, three or four 1 × 1 m exhibition spaces (£100, £150, £200 or £250 per month). You deliver your approved artwork once to the ARTB2B operational hub in Hoxton. From there, ARTB2B manages storage, curatorial coordination, transportation to participating venues, installation and regular artwork rotation.",
+              "Elige uno, dos, tres o cuatro espacios de exposición de 1 × 1 m (£100, £150, £200 o £250 al mes). Entregas tu obra aprobada una sola vez en el centro operativo de ARTB2B en Hoxton. Desde allí, ARTB2B gestiona el almacenamiento, la coordinación curatorial, el transporte a los espacios participantes, la instalación y la rotación periódica de las obras."
+            )}
           </p>
           <p>
-            <strong>Pay by Day:</strong> Book exhibition space without committing to a monthly Subscription. With Pay by Day, you arrange and manage your own artwork transport, installation, removal and related logistics directly with the participating venue.
+            <strong>{tr("Pay by Day:", "Pago por Día:")}</strong>{" "}
+            {tr(
+              "Book exhibition space without committing to a monthly Subscription. With Pay by Day, you arrange and manage your own artwork transport, installation, removal and related logistics directly with the participating venue.",
+              "Reserva espacio de exposición sin comprometerte a una Suscripción mensual. Con Pago por Día, tú organizas y gestionas el transporte, la instalación, la retirada y la logística de tu obra directamente con el espacio participante."
+            )}
           </p>
         </div>
       ),
     },
     {
       id: "subscription-delivery",
-      question: "How does artwork delivery work for Subscriptions?",
+      question: tr(
+        "How does artwork delivery work for Subscriptions?",
+        "¿Cómo funciona la entrega de obras en las Suscripciones?"
+      ),
       category: "artist",
       answer: (
         <p className="text-zinc-600 leading-relaxed font-sans">
-          Artists deliver their artwork to the ARTB2B operational hub in Hoxton, London. ARTB2B does not collect artwork from artists&apos; studios. Once your artwork is received at our Hoxton hub, ARTB2B manages transportation to participating venues, installation and subsequent artwork rotation as part of the Subscription service.
+          {tr(
+            "Artists deliver their artwork to the ARTB2B operational hub in Hoxton, London. ARTB2B does not collect artwork from artists' studios. Once your artwork is received at our Hoxton hub, ARTB2B manages transportation to participating venues, installation and subsequent artwork rotation as part of the Subscription service.",
+            "Los artistas entregan sus obras en el centro operativo de ARTB2B en Hoxton, Londres. ARTB2B no recoge obras en los estudios de los artistas. Una vez recibida tu obra en nuestro centro de Hoxton, ARTB2B gestiona el transporte a los espacios participantes, la instalación y la posterior rotación de la obra como parte del servicio de Suscripción."
+          )}
         </p>
       ),
     },
     {
       id: "subscription-pricing",
-      question: "How much does an ARTB2B Subscription cost?",
+      question: tr(
+        "How much does an ARTB2B Subscription cost?",
+        "¿Cuánto cuesta una Suscripción ARTB2B?"
+      ),
       category: "artist",
       answer: (
         <div className="space-y-3 text-zinc-600 leading-relaxed font-sans">
-          <p>Each ARTB2B Space measures 1 × 1 m. Our current monthly plans are:</p>
+          <p>
+            {tr(
+              "Each ARTB2B Space measures 1 × 1 m. Our current monthly plans are:",
+              "Cada Espacio ARTB2B mide 1 × 1 m. Nuestros planes mensuales actuales son:"
+            )}
+          </p>
           <ul className="list-disc pl-5 space-y-1.5 text-sm">
-            <li><strong>One Space:</strong> £100 / month (1 × 1 m exhibition space)</li>
-            <li><strong>Two Spaces:</strong> £150 / month (£75 per space · Save 25%)</li>
-            <li><strong>Three Spaces:</strong> £200 / month (£66.67 per space · Save 33%)</li>
-            <li><strong>Four Spaces:</strong> £250 / month (£62.50 per space · Best Value · Save 37.5%)</li>
+            <li>
+              <strong>{tr("One Space:", "Un Espacio:")}</strong>{" "}
+              {tr("£100 / month (1 × 1 m exhibition space)", "£100 / mes (espacio de exposición de 1 × 1 m)")}
+            </li>
+            <li>
+              <strong>{tr("Two Spaces:", "Dos Espacios:")}</strong>{" "}
+              {tr("£150 / month (£75 per space · Save 25%)", "£150 / mes (£75 por espacio · Ahorra 25%)")}
+            </li>
+            <li>
+              <strong>{tr("Three Spaces:", "Tres Espacios:")}</strong>{" "}
+              {tr("£200 / month (£66.67 per space · Save 33%)", "£200 / mes (£66.67 por espacio · Ahorra 33%)")}
+            </li>
+            <li>
+              <strong>{tr("Four Spaces:", "Cuatro Espacios:")}</strong>{" "}
+              {tr(
+                "£250 / month (£62.50 per space · Best Value · Save 37.5%)",
+                "£250 / mes (£62.50 por espacio · Mejor Valor · Ahorra 37.5%)"
+              )}
+            </li>
           </ul>
           <p className="text-sm pt-1">
-            Subscriptions have a 3 month minimum commitment and renew automatically every month. You can change your package anytime from your profile in the app.
+            {tr(
+              "Subscriptions have a 3 month minimum commitment and renew automatically every month. You can change your package anytime from your profile in the app.",
+              "Las Suscripciones tienen un compromiso mínimo de 3 meses y se renuevan automáticamente cada mes. Puedes cambiar tu plan en cualquier momento desde tu perfil en la aplicación."
+            )}
           </p>
         </div>
       ),
     },
     {
       id: "artwork-sales",
-      question: "What happens if my artwork sells during an exhibition?",
+      question: tr(
+        "What happens if my artwork sells during an exhibition?",
+        "¿Qué ocurre si mi obra se vende durante una exposición?"
+      ),
       category: "artist",
       answer: (
         <p className="text-zinc-600 leading-relaxed font-sans">
-          You always set the sale price of your artwork in your artist profile. If your artwork sells through ARTB2B, we retain 30% as commission and you keep 70%.
+          {tr(
+            "You always set the sale price of your artwork in your artist profile. If your artwork sells through ARTB2B, we retain 30% as commission and you keep 70%.",
+            "Tú siempre fijas el precio de venta de tu obra en tu perfil de artista. Si tu obra se vende a través de ARTB2B, retenemos el 30% de comisión y tú recibes el 70%."
+          )}
         </p>
       ),
     },
     {
       id: "for-venues-network",
-      question: "How can my venue join the ARTB2B Art Gallery Network?",
+      question: tr(
+        "How can my venue join the ARTB2B Art Gallery Network?",
+        "¿Cómo puede mi espacio unirse a la Red de Galerías de Arte ARTB2B?"
+      ),
       category: "venue",
       answer: (
         <p className="text-zinc-600 leading-relaxed font-sans">
-          Bring original art into your space and become part of the ARTB2B Art Gallery Network. We coordinate artwork selection, installation and rotation, helping cafés, restaurants, hotels and creative spaces offer guests a changing cultural experience. Visit our{" "}
+          {tr(
+            "Bring original art into your space and become part of the ARTB2B Art Gallery Network. We coordinate artwork selection, installation and rotation, helping cafés, restaurants, hotels and creative spaces offer guests a changing cultural experience. Visit our ",
+            "Lleva arte original a tu local y forma parte de la Red de Galerías de Arte ARTB2B. Coordinamos la selección, instalación y rotación de las obras, ayudando a cafeterías, restaurantes, hoteles y espacios creativos a ofrecer una experiencia cultural renovada. Visita nuestra página "
+          )}
           <Link href="/for-venues" className="font-semibold text-zinc-950 underline">
-            For Venues
-          </Link>{" "}
-          page or use the Partner Inquiry form to get started.
+            {tr("For Venues", "Para Espacios")}
+          </Link>
+          {tr(
+            " page or use the Partner Inquiry form to get started.",
+            " o utiliza el formulario de contacto para empezar."
+          )}
         </p>
       ),
     },
     {
       id: "who-is-it-for",
-      question: "Who is ARTB2B for?",
+      question: tr("Who is ARTB2B for?", "¿Para quién es ARTB2B?"),
       category: "general",
       answer: (
         <div className="space-y-4">
           <p className="text-zinc-600 leading-relaxed font-sans">
-            ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery:
+            {tr(
+              "ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery:",
+              "ARTB2B conecta artistas y espacios, llevando obras originales a lugares cotidianos y creando nuevas oportunidades de descubrimiento:"
+            )}
           </p>
           <ul className="list-none pl-0 space-y-3 text-sm text-zinc-600 font-sans">
             <li className="flex gap-3">
@@ -112,7 +177,11 @@ export default function FAQPage() {
                 1
               </span>
               <span>
-                <strong>Visual Artists:</strong> Exhibit your work across participating cafés, restaurants, hotels and creative venues via a managed Subscription or flexible Pay by Day booking.
+                <strong>{tr("Visual Artists:", "Artistas Visuales:")}</strong>{" "}
+                {tr(
+                  "Exhibit your work across participating cafés, restaurants, hotels and creative venues via a managed Subscription or flexible Pay by Day booking.",
+                  "Expón tu obra en cafeterías, restaurantes, hoteles y espacios creativos participantes mediante una Suscripción gestionada o reservas flexibles de Pago por Día."
+                )}
               </span>
             </li>
             <li className="flex gap-3">
@@ -120,7 +189,11 @@ export default function FAQPage() {
                 2
               </span>
               <span>
-                <strong>Hospitality &amp; Creative Venues:</strong> Transform your walls into an active gallery space with coordinated artwork displays and regular rotations.
+                <strong>{tr("Hospitality & Creative Venues:", "Espacios Creativos y de Hostelería:")}</strong>{" "}
+                {tr(
+                  "Transform your walls into an active gallery space with coordinated artwork displays and regular rotations.",
+                  "Transforma tus paredes en una galería activa con exposiciones coordinadas y rotaciones periódicas."
+                )}
               </span>
             </li>
             <li className="flex gap-3">
@@ -128,7 +201,11 @@ export default function FAQPage() {
                 3
               </span>
               <span>
-                <strong>Guests &amp; Art Lovers:</strong> Discover and purchase contemporary artwork in the everyday places you already visit.
+                <strong>{tr("Guests & Art Lovers:", "Clientes y Amantes del Arte:")}</strong>{" "}
+                {tr(
+                  "Discover and purchase contemporary artwork in the everyday places you already visit.",
+                  "Descubre y adquiere arte contemporáneo en los lugares que visitas cada día."
+                )}
               </span>
             </li>
           </ul>
@@ -161,6 +238,13 @@ export default function FAQPage() {
     }
   };
 
+  const getCategoryLabel = (cat: "all" | "general" | "artist" | "venue") => {
+    if (cat === "all") return tr("All Questions", "Todas");
+    if (cat === "general") return tr("General", "General");
+    if (cat === "artist") return tr("Artist", "Artistas");
+    return tr("Venue", "Espacios");
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfcfd] relative">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -174,13 +258,16 @@ export default function FAQPage() {
           <div className="text-center mb-16">
             <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/25 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
               <ShieldQuestion className="w-3.5 h-3.5 text-zinc-950" />
-              FAQ Help Centre
+              {tr("FAQ Help Centre", "Centro de Ayuda FAQ")}
             </span>
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 mb-6 leading-tight">
-              Frequently Asked <br className="hidden sm:inline" /> Questions
+              {tr("Frequently Asked Questions", "Preguntas Frecuentes")}
             </h1>
             <p className="font-sans text-base sm:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-              Find answers about ARTB2B Subscriptions, our Hoxton operational hub, Pay by Day bookings and the ARTB2B Art Gallery Network.
+              {tr(
+                "Find answers about ARTB2B Subscriptions, our Hoxton operational hub, Pay by Day bookings and the ARTB2B Art Gallery Network.",
+                "Encuentra respuestas sobre las Suscripciones ARTB2B, nuestro centro operativo en Hoxton, las reservas de Pago por Día y la Red de Galerías de Arte ARTB2B."
+              )}
             </p>
           </div>
 
@@ -201,7 +288,7 @@ export default function FAQPage() {
                       }`}
                     >
                       {cat !== "all" && getCategoryIcon(cat)}
-                      <span>{cat === "all" ? "All Questions" : cat}</span>
+                      <span>{getCategoryLabel(cat)}</span>
                     </button>
                   );
                 })}
@@ -211,7 +298,7 @@ export default function FAQPage() {
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
                 <input
                   type="text"
-                  placeholder="Search FAQ..."
+                  placeholder={tr("Search FAQ...", "Buscar en FAQ...")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-zinc-50 border border-zinc-200 focus:border-zinc-950 focus:outline-none rounded-xl pl-10 pr-4 py-2.5 font-sans text-xs text-zinc-900 placeholder-zinc-400 transition-colors shadow-sm"
@@ -274,9 +361,14 @@ export default function FAQPage() {
             ) : (
               <div className="text-center py-16 bg-white border border-dashed border-zinc-200 rounded-3xl p-8">
                 <HelpCircle className="w-12 h-12 text-zinc-350 mx-auto mb-4" />
-                <h3 className="font-heading text-lg font-bold text-zinc-950">No FAQs found</h3>
+                <h3 className="font-heading text-lg font-bold text-zinc-950">
+                  {tr("No FAQs found", "No se encontraron preguntas")}
+                </h3>
                 <p className="font-sans text-sm text-zinc-500 mt-2 max-w-sm mx-auto">
-                  We could not find any questions matching your query &ldquo;{searchQuery}&rdquo;.
+                  {tr(
+                    `We could not find any questions matching your query "${searchQuery}".`,
+                    `No encontramos preguntas que coincidan con "${searchQuery}".`
+                  )}
                 </p>
               </div>
             )}
@@ -288,13 +380,16 @@ export default function FAQPage() {
               <div className="text-left max-w-xl">
                 <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-white font-sans text-[10px] font-bold uppercase tracking-wider mb-4 inline-flex items-center gap-1.5">
                   <MessageSquare className="w-3 h-3 text-brand-accent" />
-                  Still have questions?
+                  {tr("Still have questions?", "¿Tienes más preguntas?")}
                 </span>
                 <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
-                  We are here to help.
+                  {tr("We are here to help.", "Estamos aquí para ayudarte.")}
                 </h3>
                 <p className="font-sans text-sm text-zinc-400 leading-relaxed">
-                  Reach out to our team for questions about Subscriptions, Pay by Day or joining the ARTB2B Art Gallery Network.
+                  {tr(
+                    "Reach out to our team for questions about Subscriptions, Pay by Day or joining the ARTB2B Art Gallery Network.",
+                    "Ponte en contacto con nuestro equipo si tienes preguntas sobre las Suscripciones, Pago por Día o cómo unirte a la Red de Galerías de Arte ARTB2B."
+                  )}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto justify-end">
@@ -302,13 +397,13 @@ export default function FAQPage() {
                   href="mailto:info@artb2b.art"
                   className="px-6 py-3.5 rounded-xl border border-zinc-800 hover:border-zinc-700 bg-zinc-900 text-white text-center font-sans text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                 >
-                  Email Us
+                  {tr("Email Us", "Enviar Correo")}
                 </a>
                 <Link
                   href="/#partner-form"
                   className="px-6 py-3.5 rounded-xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 text-center font-sans text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
-                  <span>Partner With Us</span>
+                  <span>{tr("Partner With Us", "Colabora con Nosotros")}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

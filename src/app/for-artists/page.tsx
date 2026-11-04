@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,8 +19,11 @@ import {
   VERIFIED_PLACEMENTS,
   SUBSCRIPTION_PLANS,
 } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ForArtistsPage() {
+  const { tr } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfcfd]">
       <Navbar />
@@ -33,15 +38,18 @@ export default function ForArtistsPage() {
               <div className="lg:col-span-6">
                 <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-zinc-950" />
-                  For Artists
+                  {tr("For Artists", "Para Artistas")}
                 </span>
 
                 <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.05] mb-6">
-                  More Than a Wall
+                  {tr("More Than a Wall", "Más Que una Pared")}
                 </h1>
 
                 <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-xl mb-10 leading-relaxed">
-                  ARTB2B helps artists reach new audiences by exhibiting their work in active hospitality and creative venues. Choose the flexibility of Pay by Day or the convenience of a managed Subscription.
+                  {tr(
+                    "ARTB2B helps artists reach new audiences by exhibiting their work in active hospitality and creative venues. Choose the flexibility of Pay by Day or the convenience of a managed Subscription.",
+                    "ARTB2B ayuda a los artistas a llegar a nuevos públicos exponiendo su obra en espacios creativos y de hostelería activos. Elige la flexibilidad del Pago por Día o la comodidad de una Suscripción gestionada."
+                  )}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -49,7 +57,7 @@ export default function ForArtistsPage() {
                     href="/subscriptions"
                     className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                   >
-                    <span>Explore Plans</span>
+                    <span>{tr("Explore Plans", "Explorar Planes")}</span>
                     <ArrowRight className="w-4 h-4 text-brand-accent" />
                   </Link>
 
@@ -57,7 +65,7 @@ export default function ForArtistsPage() {
                     href="/pay-by-day"
                     className="px-8 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-50 transition-all border border-zinc-200 shadow-sm hover:shadow-md font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
                   >
-                    <span>Pay by Day</span>
+                    <span>{tr("Pay by Day", "Pago por Día")}</span>
                     <ArrowRight className="w-4 h-4 text-zinc-950" />
                   </Link>
                 </div>
@@ -100,13 +108,16 @@ export default function ForArtistsPage() {
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <span className="px-3.5 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-                Two Exhibition Options
+                {tr("Two Exhibition Options", "Dos Opciones de Exposición")}
               </span>
               <h2 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-4 leading-tight">
-                Choose How You Want to Exhibit
+                {tr("Choose How You Want to Exhibit", "Elige Cómo Quieres Exponer")}
               </h2>
               <p className="font-sans text-base text-zinc-600 leading-relaxed">
-                Whether you want continuous managed exhibitions across London or a single self managed booking, ARTB2B offers two clear paths.
+                {tr(
+                  "Whether you want continuous managed exhibitions across London or a single self managed booking, ARTB2B offers two clear paths.",
+                  "Tanto si buscas exposiciones continuas gestionadas en Londres como una reserva puntual autogestionada, ARTB2B te ofrece dos caminos claros."
+                )}
               </p>
             </div>
 
@@ -119,33 +130,59 @@ export default function ForArtistsPage() {
                       <Layers className="w-6 h-6" />
                     </div>
                     <span className="px-3.5 py-1 rounded-full bg-brand-accent/20 border border-brand-accent/40 text-brand-accent font-sans text-xs font-bold uppercase tracking-wider">
-                      From {SUBSCRIPTION_PLANS[0].price} / month
+                      {tr(
+                        `From ${SUBSCRIPTION_PLANS[0].price} / month`,
+                        `Desde ${SUBSCRIPTION_PLANS[0].price} / mes`
+                      )}
                     </span>
                   </div>
 
                   <h3 className="font-heading text-3xl font-black mb-4">
-                    Managed Subscriptions
+                    {tr("Managed Subscriptions", "Suscripciones Gestionadas")}
                   </h3>
                   <p className="font-sans text-sm sm:text-base text-zinc-300 mb-8 leading-relaxed">
-                    Choose one, two, three or four exhibition spaces, each measuring 1 × 1 m. Your monthly Subscription includes storage, curatorial coordination, transportation from our Hoxton hub to venues, installation and artwork rotation.
+                    {tr(
+                      "Choose one, two, three or four exhibition spaces, each measuring 1 × 1 m. Your monthly Subscription includes storage, curatorial coordination, transportation from our Hoxton hub to venues, installation and artwork rotation.",
+                      "Elige uno, dos, tres o cuatro espacios de exposición de 1 × 1 m cada uno. Tu Suscripción mensual incluye almacenamiento, coordinación curatorial, transporte desde nuestro centro en Hoxton a los espacios, instalación y rotación de obras."
+                    )}
                   </p>
 
                   <ul className="space-y-3.5 mb-10 text-sm text-zinc-200 font-sans">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Deliver your artwork once to the ARTB2B operational hub in Hoxton</span>
+                      <span>
+                        {tr(
+                          "Deliver your artwork once to the ARTB2B operational hub in Hoxton",
+                          "Entrega tu obra una sola vez en el centro operativo de ARTB2B en Hoxton"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Curatorial selection of suitable participating hospitality and creative venues</span>
+                      <span>
+                        {tr(
+                          "Curatorial selection of suitable participating hospitality and creative venues",
+                          "Selección curatorial de espacios creativos y de hostelería adecuados"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Transport from ARTB2B storage to participating venues included within the same city</span>
+                      <span>
+                        {tr(
+                          "Transport from ARTB2B storage to participating venues included within the same city",
+                          "Transporte desde el almacén de ARTB2B a los espacios incluido dentro de la misma ciudad"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
-                      <span>Installation and monthly artwork rotation managed by ARTB2B</span>
+                      <span>
+                        {tr(
+                          "Installation and monthly artwork rotation managed by ARTB2B",
+                          "Instalación y rotación mensual de obras gestionadas por ARTB2B"
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -154,7 +191,7 @@ export default function ForArtistsPage() {
                   href="/subscriptions"
                   className="w-full py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 font-sans text-sm font-bold text-center transition-colors inline-flex items-center justify-center gap-2"
                 >
-                  <span>Explore Plans</span>
+                  <span>{tr("Explore Plans", "Explorar Planes")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -167,33 +204,56 @@ export default function ForArtistsPage() {
                       <Calendar className="w-6 h-6" />
                     </div>
                     <span className="px-3.5 py-1 rounded-full bg-white border border-zinc-200 text-zinc-800 font-sans text-xs font-bold uppercase tracking-wider">
-                      No Monthly Commitment
+                      {tr("No Monthly Commitment", "Sin Compromiso Mensual")}
                     </span>
                   </div>
 
                   <h3 className="font-heading text-3xl font-black mb-4">
-                    Pay by Day
+                    {tr("Pay by Day", "Pago por Día")}
                   </h3>
                   <p className="font-sans text-sm sm:text-base text-zinc-600 mb-8 leading-relaxed">
-                    Book exhibition opportunities without committing to a monthly Subscription. With Pay by Day, you are responsible for artwork transport, installation, removal and other practical arrangements.
+                    {tr(
+                      "Book exhibition opportunities without committing to a monthly Subscription. With Pay by Day, you are responsible for artwork transport, installation, removal and other practical arrangements.",
+                      "Reserva oportunidades de exposición sin comprometerte a una Suscripción mensual. Con Pago por Día, eres responsable del transporte, la instalación, la retirada de la obra y demás gestiones prácticas."
+                    )}
                   </p>
 
                   <ul className="space-y-3.5 mb-10 text-sm text-zinc-700 font-sans">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Browse available venues and send booking requests directly in the app</span>
+                      <span>
+                        {tr(
+                          "Browse available venues and send booking requests directly in the app",
+                          "Explora espacios disponibles y envía solicitudes de reserva directamente en la app"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Ideal for one off exhibitions without a monthly commitment</span>
+                      <span>
+                        {tr(
+                          "Ideal for one off exhibitions without a monthly commitment",
+                          "Ideal para exposiciones puntuales sin compromiso mensual"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>You arrange and manage your own artwork delivery and installation</span>
+                      <span>
+                        {tr(
+                          "You arrange and manage your own artwork delivery and installation",
+                          "Tú organizas y gestionas la entrega e instalación de tu propia obra"
+                        )}
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-zinc-950 shrink-0 mt-0.5" />
-                      <span>Collect your artwork directly from the venue at the end of the booking</span>
+                      <span>
+                        {tr(
+                          "Collect your artwork directly from the venue at the end of the booking",
+                          "Recoge tu obra directamente en el espacio al finalizar la reserva"
+                        )}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -202,7 +262,7 @@ export default function ForArtistsPage() {
                   href="/pay-by-day"
                   className="w-full py-4 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white font-sans text-sm font-bold text-center transition-colors inline-flex items-center justify-center gap-2"
                 >
-                  <span>Pay by Day</span>
+                  <span>{tr("Pay by Day", "Pago por Día")}</span>
                   <ArrowRight className="w-4 h-4 text-brand-accent" />
                 </Link>
               </div>
@@ -216,10 +276,16 @@ export default function ForArtistsPage() {
                 </div>
                 <div>
                   <h4 className="font-heading text-lg font-bold text-zinc-950">
-                    If your artwork sells during an exhibition
+                    {tr(
+                      "If your artwork sells during an exhibition",
+                      "Si tu obra se vende durante una exposición"
+                    )}
                   </h4>
                   <p className="font-sans text-sm text-zinc-700 mt-1">
-                    We keep 30% as commission, you keep 70%. You always set the sale price in your artist profile.
+                    {tr(
+                      "We keep 30% as commission, you keep 70%. You always set the sale price in your artist profile.",
+                      "Retenemos el 30% de comisión y tú recibes el 70%. Tú siempre fijas el precio de venta en tu perfil de artista."
+                    )}
                   </p>
                 </div>
               </div>
@@ -229,7 +295,7 @@ export default function ForArtistsPage() {
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl bg-zinc-950 text-white font-sans text-xs font-bold uppercase tracking-wider hover:bg-zinc-800 transition-colors shrink-0 inline-flex items-center gap-1.5"
               >
-                <span>Create Artist Profile</span>
+                <span>{tr("Create Artist Profile", "Crear Perfil de Artista")}</span>
                 <ArrowUpRight className="w-4 h-4 text-brand-accent" />
               </a>
             </div>

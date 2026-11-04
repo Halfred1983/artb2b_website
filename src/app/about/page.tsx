@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
@@ -12,8 +14,11 @@ import {
   Sparkles,
 } from "lucide-react";
 import { APP_REGISTER_URL } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutPage() {
+  const { tr } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen bg-[#fcfcfd]">
       <Navbar />
@@ -26,15 +31,21 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <span className="px-3.5 py-1.5 rounded-full bg-brand-accent/20 border border-brand-accent/35 text-zinc-950 font-sans text-xs font-bold uppercase tracking-wider mb-6 inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-zinc-950" />
-              About ARTB2B
+              {tr("About ARTB2B", "Sobre ARTB2B")}
             </span>
 
             <h1 className="font-heading text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-zinc-950 leading-[1.05] mb-6">
-              Art Beyond Traditional Galleries
+              {tr(
+                "Art Beyond Traditional Galleries",
+                "Arte Más Allá de las Galerías Tradicionales"
+              )}
             </h1>
 
             <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed mb-10">
-              ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery across cafés, restaurants, hotels and creative venues.
+              {tr(
+                "ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery across cafés, restaurants, hotels and creative venues.",
+                "ARTB2B conecta artistas y espacios, llevando obras de arte originales a lugares cotidianos y creando nuevas oportunidades de descubrimiento en cafeterías, restaurantes, hoteles y espacios creativos."
+              )}
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -42,14 +53,14 @@ export default function AboutPage() {
                 href="/subscriptions"
                 className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
               >
-                <span>Explore Subscriptions</span>
+                <span>{tr("Explore Subscriptions", "Explorar Suscripciones")}</span>
                 <ArrowRight className="w-4 h-4 text-brand-accent" />
               </Link>
               <Link
                 href="/network"
                 className="px-8 py-4 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-50 transition-all border border-zinc-200 shadow-sm font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
               >
-                <span>Explore Our Network</span>
+                <span>{tr("Explore Our Network", "Explorar Nuestra Red")}</span>
               </Link>
             </div>
           </div>
@@ -65,16 +76,19 @@ export default function AboutPage() {
                   <Layers className="w-6 h-6" />
                 </div>
                 <h2 className="font-heading text-2xl font-bold text-zinc-950 mb-3">
-                  Managed Subscriptions
+                  {tr("Managed Subscriptions", "Suscripciones Gestionadas")}
                 </h2>
                 <p className="font-sans text-sm sm:text-base text-zinc-600 leading-relaxed mb-6">
-                  With an ARTB2B Subscription, artists choose one, two, three or four 1 × 1 m exhibition spaces. Artists deliver their artwork to the ARTB2B operational hub in Hoxton, and from there we manage storage, curatorial coordination, transport to participating venues, installation and artwork rotation.
+                  {tr(
+                    "With an ARTB2B Subscription, artists choose one, two, three or four 1 × 1 m exhibition spaces. Artists deliver their artwork to the ARTB2B operational hub in Hoxton, and from there we manage storage, curatorial coordination, transport to participating venues, installation and artwork rotation.",
+                    "Con una Suscripción ARTB2B, los artistas eligen uno, dos, tres o cuatro espacios de exposición de 1 × 1 m. Los artistas entregan su obra en el centro operativo de ARTB2B en Hoxton y, desde allí, gestionamos el almacenamiento, la coordinación curatorial, el transporte a los espacios participantes, la instalación y la rotación de las obras."
+                  )}
                 </p>
                 <Link
                   href="/subscriptions"
                   className="text-xs font-bold uppercase tracking-wider text-zinc-950 hover:underline inline-flex items-center gap-1.5"
                 >
-                  <span>View Subscription Plans</span>
+                  <span>{tr("View Subscription Plans", "Ver Planes de Suscripción")}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -85,16 +99,19 @@ export default function AboutPage() {
                   <Calendar className="w-6 h-6" />
                 </div>
                 <h2 className="font-heading text-2xl font-bold text-zinc-950 mb-3">
-                  Pay by Day Flexibility
+                  {tr("Pay by Day Flexibility", "Flexibilidad de Pago por Día")}
                 </h2>
                 <p className="font-sans text-sm sm:text-base text-zinc-600 leading-relaxed mb-6">
-                  For artists who prefer a one off exhibition without committing to a monthly Subscription, Pay by Day offers direct booking of exhibition spaces. With Pay by Day, the artist is responsible for artwork delivery, installation, removal and related logistics.
+                  {tr(
+                    "For artists who prefer a one off exhibition without committing to a monthly Subscription, Pay by Day offers direct booking of exhibition spaces. With Pay by Day, the artist is responsible for artwork delivery, installation, removal and related logistics.",
+                    "Para los artistas que prefieren una exposición puntual sin comprometerse a una Suscripción mensual, Pago por Día ofrece la reserva directa de espacios expositivos. Con Pago por Día, el artista es responsable de la entrega, instalación, retirada y logística de la obra."
+                  )}
                 </p>
                 <Link
                   href="/pay-by-day"
                   className="text-xs font-bold uppercase tracking-wider text-zinc-950 hover:underline inline-flex items-center gap-1.5"
                 >
-                  <span>Explore Pay by Day</span>
+                  <span>{tr("Explore Pay by Day", "Explorar Pago por Día")}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -105,10 +122,13 @@ export default function AboutPage() {
                   <Warehouse className="w-6 h-6" />
                 </div>
                 <h2 className="font-heading text-2xl font-bold text-zinc-950 mb-3">
-                  Our Hoxton Operational Hub
+                  {tr("Our Hoxton Operational Hub", "Nuestro Centro Operativo en Hoxton")}
                 </h2>
                 <p className="font-sans text-sm sm:text-base text-zinc-600 leading-relaxed">
-                  Located on Hoxton Street in London, our operational hub serves as the central drop off and storage point for Subscription artworks. Artists deliver approved works once to the hub, enabling coordinated rotations across our London venue network.
+                  {tr(
+                    "Located on Hoxton Street in London, our operational hub serves as the central drop off and storage point for Subscription artworks. Artists deliver approved works once to the hub, enabling coordinated rotations across our London venue network.",
+                    "Ubicado en Hoxton Street en Londres, nuestro centro operativo funciona como punto central de recepción y almacenamiento para las obras de Suscripción. Los artistas entregan sus obras aprobadas una sola vez en el centro, permitiendo rotaciones coordinadas en nuestra red de espacios de Londres."
+                  )}
                 </p>
               </div>
 
@@ -118,16 +138,19 @@ export default function AboutPage() {
                   <Building2 className="w-6 h-6" />
                 </div>
                 <h2 className="font-heading text-2xl font-bold text-zinc-950 mb-3">
-                  The ARTB2B Art Gallery Network
+                  {tr("The ARTB2B Art Gallery Network", "La Red de Galerías de Arte ARTB2B")}
                 </h2>
                 <p className="font-sans text-sm sm:text-base text-zinc-600 leading-relaxed mb-6">
-                  We partner with hospitality and creative spaces across London to turn everyday venues into living galleries. Participating venues receive curated artwork displays and regular rotations for their guests.
+                  {tr(
+                    "We partner with hospitality and creative spaces across London to turn everyday venues into living galleries. Participating venues receive curated artwork displays and regular rotations for their guests.",
+                    "Colaboramos con espacios de hostelería y creatividad en Londres para convertir locales cotidianos en galerías vivas. Los espacios participantes reciben exposiciones de arte seleccionadas y rotaciones periódicas para sus clientes."
+                  )}
                 </p>
                 <Link
                   href="/for-venues"
                   className="text-xs font-bold uppercase tracking-wider text-zinc-950 hover:underline inline-flex items-center gap-1.5"
                 >
-                  <span>Partner With Us</span>
+                  <span>{tr("Partner With Us", "Colabora con Nosotros")}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -136,10 +159,13 @@ export default function AboutPage() {
             {/* CTA Banner */}
             <div className="mt-16 bg-zinc-950 text-white rounded-[2.5rem] p-8 sm:p-12 text-center border border-zinc-800">
               <h3 className="font-heading text-3xl font-extrabold mb-4">
-                Ready to Exhibit?
+                {tr("Ready to Exhibit?", "¿Listo para Exponer?")}
               </h3>
               <p className="font-sans text-sm sm:text-base text-zinc-300 max-w-xl mx-auto mb-8">
-                Join ARTB2B, explore available exhibition options and take the next step with your artwork.
+                {tr(
+                  "Join ARTB2B, explore available exhibition options and take the next step with your artwork.",
+                  "Únete a ARTB2B, explora las opciones de exposición disponibles y da el siguiente paso con tu obra."
+                )}
               </p>
               <a
                 href={APP_REGISTER_URL}
@@ -147,7 +173,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="px-8 py-4 rounded-2xl bg-brand-accent hover:bg-brand-accent-hover text-zinc-950 font-sans text-sm font-bold inline-flex items-center gap-2"
               >
-                <span>Join ARTB2B</span>
+                <span>{tr("Join ARTB2B", "Únete a ARTB2B")}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>

@@ -1,26 +1,43 @@
+"use client";
+
 import { UserPlus, Layers, Warehouse, RefreshCw, ArrowUpRight } from "lucide-react";
 import { APP_REGISTER_URL } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function HowItWorks() {
+  const { tr } = useLanguage();
+
   const steps = [
     {
       number: "01",
-      text: "Join ARTB2B and create your artist profile.",
+      text: tr(
+        "Join ARTB2B and create your artist profile.",
+        "Únete a ARTB2B y crea tu perfil de artista."
+      ),
       icon: UserPlus,
     },
     {
       number: "02",
-      text: "Choose a Subscription or Pay by Day.",
+      text: tr(
+        "Choose a Subscription or Pay by Day.",
+        "Elige una Suscripción o Pago por Día."
+      ),
       icon: Layers,
     },
     {
       number: "03",
-      text: "For Subscriptions, deliver your artwork to the ARTB2B operational hub in Hoxton.",
+      text: tr(
+        "For Subscriptions, deliver your artwork to the ARTB2B operational hub in Hoxton.",
+        "Para las Suscripciones, entrega tu obra en el centro operativo de ARTB2B en Hoxton."
+      ),
       icon: Warehouse,
     },
     {
       number: "04",
-      text: "ARTB2B coordinates placement, installation and rotation across participating venues.",
+      text: tr(
+        "ARTB2B coordinates placement, installation and rotation across participating venues.",
+        "ARTB2B coordina la ubicación, instalación y rotación en los espacios participantes."
+      ),
       icon: RefreshCw,
     },
   ];
@@ -36,10 +53,10 @@ export default function HowItWorks() {
         {/* Section Header: HOME / 02 HOW IT WORKS */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="px-3.5 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 font-sans text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-            How It Works
+            {tr("How It Works", "Cómo Funciona")}
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 leading-tight">
-            From Your Studio to Real Spaces
+            {tr("From Your Studio to Real Spaces", "De Tu Estudio a Espacios Reales")}
           </h2>
         </div>
 
@@ -78,7 +95,7 @@ export default function HowItWorks() {
             rel="noopener noreferrer"
             className="px-8 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl font-sans text-sm font-bold inline-flex items-center gap-2"
           >
-            <span>Get Started</span>
+            <span>{tr("Get Started", "Empezar")}</span>
             <ArrowUpRight className="w-4 h-4 text-brand-accent" />
           </a>
         </div>

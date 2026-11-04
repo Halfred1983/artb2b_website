@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle, ArrowRight, Mail, MapPin, Loader2, ArrowUpRight } from "lucide-react";
+import { CheckCircle, ArrowRight, Mail, MapPin, Loader2, ArrowUpRight, Globe } from "lucide-react";
 import { APP_URL, APP_STORE_URL, PLAY_STORE_URL, INSTAGRAM_URL } from "@/lib/network-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { lang, setLang, tr } = useLanguage();
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,10 +36,21 @@ export default function Footer() {
           setIsSubscribed(false);
         }, 6000);
       } else {
-        setErrorMessage(data.error || "Failed to subscribe. Please try again.");
+        setErrorMessage(
+          data.error ||
+            tr(
+              "Failed to subscribe. Please try again.",
+              "No se pudo completar la suscripción. Por favor, inténtalo de nuevo."
+            )
+        );
       }
     } catch {
-      setErrorMessage("Network error. Please try again.");
+      setErrorMessage(
+        tr(
+          "Network error. Please try again.",
+          "Error de conexión. Por favor, inténtalo de nuevo."
+        )
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -68,10 +81,13 @@ export default function Footer() {
               </Link>
 
               <p className="font-sans text-sm text-zinc-400 max-w-sm mb-8 leading-relaxed">
-                ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery.
+                {tr(
+                  "ARTB2B connects artists and venues, bringing original artwork into everyday spaces and creating new opportunities for discovery.",
+                  "ARTB2B conecta artistas y espacios, llevando obras de arte originales a lugares cotidianos y creando nuevas oportunidades de descubrimiento."
+                )}
               </p>
 
-              <div className="flex flex-col gap-3 font-sans text-xs text-zinc-400">
+              <div className="flex flex-col gap-3 font-sans text-xs text-zinc-400 mb-6">
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-brand-accent shrink-0" />
                   <a href="mailto:info@artb2b.art" className="hover:text-white transition-colors">
@@ -80,8 +96,40 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-brand-accent shrink-0" />
-                  <span>Hoxton Operational Hub · London, United Kingdom</span>
+                  <span>
+                    {tr(
+                      "Hoxton Operational Hub · London, United Kingdom",
+                      "Centro Operativo de Hoxton · Londres, Reino Unido"
+                    )}
+                  </span>
                 </div>
+              </div>
+
+              {/* Footer Language Switcher */}
+              <div className="inline-flex items-center gap-2 self-start bg-zinc-900 border border-zinc-800 rounded-full p-1 text-xs font-sans font-bold">
+                <Globe className="w-3.5 h-3.5 text-zinc-400 ml-2" />
+                <button
+                  type="button"
+                  onClick={() => setLang("en")}
+                  className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
+                    lang === "en"
+                      ? "bg-brand-accent text-zinc-950"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  English
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang("es")}
+                  className={`px-3 py-1 rounded-full transition-colors cursor-pointer ${
+                    lang === "es"
+                      ? "bg-brand-accent text-zinc-950"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  Español
+                </button>
               </div>
             </div>
 
@@ -89,29 +137,29 @@ export default function Footer() {
             <div className="lg:col-span-4 grid grid-cols-2 gap-8 lg:border-l lg:border-zinc-800/60 lg:pl-10">
               <div className="flex flex-col justify-start">
                 <h4 className="font-heading text-xs font-bold uppercase tracking-wider text-zinc-500 mb-5">
-                  Navigation
+                  {tr("Navigation", "Navegación")}
                 </h4>
                 <div className="flex flex-col gap-3.5 font-sans text-xs text-zinc-400 font-medium">
                   <Link href="/about" className="hover:text-white transition-colors">
-                    About ARTB2B
+                    {tr("About ARTB2B", "Sobre ARTB2B")}
                   </Link>
                   <Link href="/for-artists" className="hover:text-white transition-colors">
-                    For Artists
+                    {tr("For Artists", "Para Artistas")}
                   </Link>
                   <Link href="/subscriptions" className="hover:text-white transition-colors">
-                    Subscriptions
+                    {tr("Subscriptions", "Suscripciones")}
                   </Link>
                   <Link href="/pay-by-day" className="hover:text-white transition-colors">
-                    Pay by Day
+                    {tr("Pay by Day", "Pago por Día")}
                   </Link>
                   <Link href="/for-venues" className="hover:text-white transition-colors">
-                    For Venues
+                    {tr("For Venues", "Para Espacios")}
                   </Link>
                   <Link href="/network" className="hover:text-white transition-colors">
-                    Our Network
+                    {tr("Our Network", "Nuestra Red")}
                   </Link>
                   <Link href="/#partner-form" className="hover:text-white transition-colors">
-                    Contact
+                    {tr("Contact", "Contacto")}
                   </Link>
                   <Link href="/faq" className="hover:text-white transition-colors">
                     FAQ
@@ -121,7 +169,7 @@ export default function Footer() {
 
               <div className="flex flex-col justify-start">
                 <h4 className="font-heading text-xs font-bold uppercase tracking-wider text-zinc-500 mb-5">
-                  Connect &amp; App
+                  {tr("Connect & App", "Conectar y App")}
                 </h4>
                 <div className="flex flex-col gap-3.5 font-sans text-xs text-zinc-400 font-medium">
                   <a
@@ -130,7 +178,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors inline-flex items-center gap-1"
                   >
-                    <span>Download / Open App</span>
+                    <span>{tr("Download / Open App", "Descargar / Abrir App")}</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-brand-accent" />
                   </a>
                   <a
@@ -159,10 +207,10 @@ export default function Footer() {
                     <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
                   </a>
                   <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
-                    Terms &amp; Conditions
+                    {tr("Terms & Conditions", "Términos y Condiciones")}
                   </Link>
                   <Link href="/privacy-policy" className="hover:text-white transition-colors">
-                    Privacy Policy
+                    {tr("Privacy Policy", "Política de Privacidad")}
                   </Link>
                 </div>
               </div>
@@ -171,23 +219,31 @@ export default function Footer() {
             {/* Right 4 Columns: Newsletter Block */}
             <div className="lg:col-span-4 flex flex-col justify-start lg:border-l lg:border-zinc-800/60 lg:pl-10">
               <h4 className="font-heading text-sm font-bold text-white mb-2">
-                Subscribe to receive updates
+                {tr("Subscribe to receive updates", "Suscríbete para recibir novedades")}
               </h4>
               <p className="font-sans text-xs text-zinc-400 mb-6 leading-relaxed">
-                Stay informed about new participating venues, artist exhibitions and network updates.
+                {tr(
+                  "Stay informed about new participating venues, artist exhibitions and network updates.",
+                  "Mantente informado sobre nuevos espacios participantes, exposiciones de artistas y novedades de la red."
+                )}
               </p>
 
               {isSubscribed ? (
                 <div className="flex items-center gap-2 p-4 bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs rounded-2xl animate-fade-in">
                   <CheckCircle className="w-4 h-4 shrink-0" />
-                  <span>Thanks! You have successfully subscribed to our newsletter.</span>
+                  <span>
+                    {tr(
+                      "Thanks! You have successfully subscribed to our newsletter.",
+                      "¡Gracias! Te has suscrito correctamente a nuestro boletín."
+                    )}
+                  </span>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
                   <input
                     type="email"
                     required
-                    placeholder="Enter your email address"
+                    placeholder={tr("Enter your email address", "Introduce tu correo electrónico")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-zinc-900 border border-zinc-800 hover:border-zinc-700 focus:border-brand-accent focus:outline-none rounded-xl px-4 py-3 font-sans text-xs text-white placeholder-zinc-500 transition-colors"
@@ -205,11 +261,11 @@ export default function Footer() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                        <span>Subscribing...</span>
+                        <span>{tr("Subscribing...", "Suscribiendo...")}</span>
                       </>
                     ) : (
                       <>
-                        <span>Subscribe</span>
+                        <span>{tr("Subscribe", "Suscribirse")}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </>
                     )}
@@ -221,24 +277,30 @@ export default function Footer() {
 
           {/* Bottom Legal Bar */}
           <div className="border-t border-zinc-900/80 pt-10 mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10 text-xs text-zinc-500 font-sans">
-            <div>&copy; {new Date().getFullYear()} ARTB2B LTD. All rights reserved.</div>
+            <div>
+              &copy; {new Date().getFullYear()} ARTB2B LTD.{" "}
+              {tr("All rights reserved.", "Todos los derechos reservados.")}
+            </div>
 
             <div className="text-[10px] tracking-[0.2em] font-heading font-black text-zinc-700 hidden md:block uppercase select-none">
-              Your Art. More Spaces. More Opportunities.
+              {tr(
+                "Your Art. More Spaces. More Opportunities.",
+                "Tu Arte. Más Espacios. Más Oportunidades."
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
-                Terms &amp; Conditions
+                {tr("Terms & Conditions", "Términos y Condiciones")}
               </Link>
               <Link href="/privacy-policy" className="hover:text-white transition-colors">
-                Privacy Policy
+                {tr("Privacy Policy", "Política de Privacidad")}
               </Link>
               <Link href="/accessibility" className="hover:text-white transition-colors">
-                Accessibility
+                {tr("Accessibility", "Accesibilidad")}
               </Link>
               <Link href="/delete-account" className="hover:text-white transition-colors">
-                Delete Account
+                {tr("Delete Account", "Eliminar Cuenta")}
               </Link>
             </div>
           </div>
