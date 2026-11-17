@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle, ArrowRight, Mail, MapPin, Loader2, ArrowUpRight, Globe } from "lucide-react";
 import { APP_URL, APP_STORE_URL, PLAY_STORE_URL, INSTAGRAM_URL } from "@/lib/network-data";
 import { useLanguage } from "@/context/LanguageContext";
+import AppStoreButtons from "@/components/AppStoreButtons";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -103,6 +104,14 @@ export default function Footer() {
                     )}
                   </span>
                 </div>
+              </div>
+
+              {/* App Store & Google Play Store Buttons */}
+              <div className="mb-6">
+                <p className="font-heading text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-2.5">
+                  {tr("Download the Mobile App", "Descarga la App Móvil")}
+                </p>
+                <AppStoreButtons variant="dark" size="sm" />
               </div>
 
               {/* Footer Language Switcher */}

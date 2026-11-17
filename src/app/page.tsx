@@ -7,6 +7,7 @@ import HowItWorks from "@/components/HowItWorks";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import PaintbrushTrail from "@/components/PaintbrushTrail";
+import AppStoreButtons from "@/components/AppStoreButtons";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -510,7 +511,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* HOME / 07 FINAL CTA */}
+        {/* HOME / 07 FINAL CTA & MOBILE APP DOWNLOAD */}
         <section id="final-cta" className="py-20 bg-[#fcfcfd] border-t border-zinc-200/60">
           <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
             <h2 className="font-heading text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 mb-6 leading-tight">
@@ -518,20 +519,29 @@ export default function Home() {
             </h2>
             <p className="font-sans text-base sm:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed">
               {tr(
-                "Join ARTB2B, explore available exhibition options and take the next step with your artwork.",
-                "Únete a ARTB2B, explora las opciones de exposición disponibles y da el siguiente paso con tu obra."
+                "Join ARTB2B, explore available exhibition options and take the next step with your artwork. Download the mobile app on the App Store or Google Play, or get started on the web.",
+                "Únete a ARTB2B, explora las opciones de exposición disponibles y da el siguiente paso con tu obra. Descarga la aplicación móvil en el App Store o Google Play, o comienza directamente en la web."
               )}
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href={APP_REGISTER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-lg hover:shadow-xl font-sans text-base font-bold inline-flex items-center justify-center gap-2"
-              >
-                <span>{tr("Join ARTB2B", "Únete a ARTB2B")}</span>
-                <ArrowUpRight className="w-5 h-5 text-brand-accent" />
-              </a>
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+                <a
+                  href={APP_REGISTER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-lg hover:shadow-xl font-sans text-base font-bold inline-flex items-center justify-center gap-2"
+                >
+                  <span>{tr("Join ARTB2B", "Únete a ARTB2B")}</span>
+                  <ArrowUpRight className="w-5 h-5 text-brand-accent" />
+                </a>
+              </div>
+
+              <div className="pt-4 border-t border-zinc-200/80 flex flex-col items-center">
+                <p className="font-sans text-[11px] font-bold uppercase tracking-wider text-zinc-400 mb-3">
+                  {tr("Available on iOS & Android", "Disponible en iOS y Android")}
+                </p>
+                <AppStoreButtons className="justify-center" />
+              </div>
             </div>
           </div>
         </section>

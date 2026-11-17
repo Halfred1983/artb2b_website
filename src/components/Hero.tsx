@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { VERIFIED_VENUES, VERIFIED_PLACEMENTS } from "@/lib/network-data";
 import { useLanguage } from "@/context/LanguageContext";
+import AppStoreButtons from "@/components/AppStoreButtons";
 
 export default function Hero() {
   const { tr } = useLanguage();
@@ -52,7 +53,7 @@ export default function Hero() {
             </div>
 
             {/* Primary & Secondary Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-6">
               <Link
                 href="/subscriptions"
                 className="px-7 py-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 transition-all border border-zinc-950 shadow-md hover:shadow-xl hover:-translate-y-0.5 font-sans text-sm font-bold inline-flex items-center justify-center gap-2"
@@ -67,6 +68,14 @@ export default function Hero() {
               >
                 {tr("How It Works", "Cómo Funciona")}
               </Link>
+            </div>
+
+            {/* App Store & Google Play Store Download Badges */}
+            <div className="mb-10" id="download">
+              <p className="font-sans text-[11px] font-bold uppercase tracking-wider text-zinc-400 mb-2.5">
+                {tr("Get the ARTB2B Mobile App", "Descarga la App Móvil de ARTB2B")}
+              </p>
+              <AppStoreButtons size="sm" />
             </div>
 
             {/* Key Verified Highlights */}

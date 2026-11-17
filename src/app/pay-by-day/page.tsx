@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AppStoreButtons from "@/components/AppStoreButtons";
 import {
   Calendar,
   ArrowUpRight,
@@ -305,12 +306,13 @@ export default function PayByDayPage() {
 
             {/* Participating Venues Preview */}
             <div className="text-center mb-10">
-              <h3 className="font-heading text-2xl font-bold text-zinc-950">
+              <h3 className="font-heading text-2xl font-bold text-zinc-950 mb-4">
                 {tr(
                   "Explore Participating Venues in the App",
                   "Explora los Espacios Participantes en la App"
                 )}
               </h3>
+              <AppStoreButtons className="justify-center" size="sm" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {sampleVenues.map((venue) => (
